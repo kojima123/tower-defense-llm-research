@@ -1054,7 +1054,7 @@ def elm_predict():
             game_state['health'] / 100.0,  # Normalize health
             game_state['wave'] / 10.0,     # Normalize wave
             game_state['enemies'] / 10.0,  # Normalize enemies
-            game_state['towers'] / 10.0,   # Normalize towers
+            game_state.get('towers', 0) / 10.0,   # Normalize towers (optional)
             game_state.get('efficiency', 0),
             game_state.get('survival', 1),
             game_state.get('progress', 1) / 10.0

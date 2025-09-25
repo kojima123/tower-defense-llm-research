@@ -1,0 +1,96 @@
+{
+  "elm_only": [
+    {
+      "final_score": 480,
+      "towers_built": 8,
+      "efficiency": 60.0,
+      "predictions_count": 8,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.17588035265941757,
+      "avg_placement_prob": 0.5879401763297087
+    },
+    {
+      "final_score": 540,
+      "towers_built": 9,
+      "efficiency": 60.0,
+      "predictions_count": 9,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.175412206996343,
+      "avg_placement_prob": 0.5877061034981715
+    },
+    {
+      "final_score": 480,
+      "towers_built": 8,
+      "efficiency": 60.0,
+      "predictions_count": 8,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.17588035265941757,
+      "avg_placement_prob": 0.5879401763297087
+    },
+    {
+      "final_score": 480,
+      "towers_built": 8,
+      "efficiency": 60.0,
+      "predictions_count": 8,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.17588035265941757,
+      "avg_placement_prob": 0.5879401763297087
+    },
+    {
+      "final_score": 480,
+      "towers_built": 8,
+      "efficiency": 60.0,
+      "predictions_count": 8,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.17588035265941757,
+      "avg_placement_prob": 0.5879401763297087
+    }
+  ],
+  "elm_llm": [
+    {
+      "final_score": 0,
+      "towers_built": 0,
+      "efficiency": 0.0,
+      "predictions_count": 9,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.2012695373229394,
+      "avg_placement_prob": 0.3993652313385303
+    },
+    {
+      "final_score": 0,
+      "towers_built": 0,
+      "efficiency": 0.0,
+      "predictions_count": 9,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.2012695373229394,
+      "avg_placement_prob": 0.3993652313385303
+    },
+    {
+      "final_score": 0,
+      "towers_built": 0,
+      "efficiency": 0.0,
+      "predictions_count": 9,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.2012695373229394,
+      "avg_placement_prob": 0.3993652313385303
+    },
+    {
+      "final_score": 0,
+      "towers_built": 0,
+      "efficiency": 0.0,
+      "predictions_count": 9,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.2012695373229394,
+      "avg_placement_prob": 0.3993652313385303
+    },
+    {
+      "final_score": 0,
+      "towers_built": 0,
+      "efficiency": 0.0,
+      "predictions_count": 9,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.2012695373229394,
+      "avg_placement_prob": 0.3993652313385303
+    }
+  ]
+}
