@@ -1,0 +1,249 @@
+{
+  "results": {
+    "elm_only": [
+      {
+        "final_avg_score": 0.0,
+        "final_avg_efficiency": 0.0,
+        "scores": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "efficiency": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "survival_times": [
+          301,
+          301,
+          301,
+          301,
+          301,
+          301,
+          301,
+          301,
+          301,
+          301
+        ],
+        "towers_built": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "enemies_killed": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "agent_stats": {
+          "avg_training_time": 0.37,
+          "avg_inference_time": 0.007
+        }
+      }
+    ],
+    "elm_llm_hybrid": [
+      {
+        "final_avg_score": 0.0,
+        "final_avg_efficiency": 0.0,
+        "scores": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "efficiency": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "survival_times": [
+          301,
+          301,
+          301,
+          301,
+          301,
+          301,
+          301,
+          301,
+          301,
+          301
+        ],
+        "towers_built": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "enemies_killed": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "agent_stats": {
+          "avg_training_time": 0.37,
+          "avg_inference_time": 0.008,
+          "llm_stats": {
+            "api_calls": 1,
+            "avg_api_time": 0.197
+          }
+        }
+      }
+    ],
+    "experiment_config": {
+      "episodes": 10,
+      "runs": 1,
+      "timestamp": 1234567890
+    }
+  },
+  "comparison_data": {
+    "elm_only": {
+      "final_avg_score": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "median": 0.0
+      },
+      "final_avg_efficiency": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "median": 0.0
+      },
+      "detailed": {
+        "scores": {
+          "mean": 0.0,
+          "std": 0.0,
+          "total_episodes": 10
+        },
+        "survival_times": {
+          "mean": 301.0,
+          "std": 0.0
+        },
+        "towers_built": {
+          "mean": 4.0,
+          "std": 0.0
+        },
+        "enemies_killed": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      }
+    },
+    "elm_llm_hybrid": {
+      "final_avg_score": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "median": 0.0
+      },
+      "final_avg_efficiency": {
+        "mean": 0.0,
+        "std": 0.0,
+        "min": 0.0,
+        "max": 0.0,
+        "median": 0.0
+      },
+      "detailed": {
+        "scores": {
+          "mean": 0.0,
+          "std": 0.0,
+          "total_episodes": 10
+        },
+        "survival_times": {
+          "mean": 301.0,
+          "std": 0.0
+        },
+        "towers_built": {
+          "mean": 4.0,
+          "std": 0.0
+        },
+        "enemies_killed": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      }
+    },
+    "improvements": {
+      "final_avg_score": 0,
+      "final_avg_efficiency": 0
+    },
+    "statistical_significance": {},
+    "cost_analysis": {
+      "elm_only": {
+        "avg_training_time": 0.37,
+        "avg_inference_time": 0.007,
+        "total_cost": 0.0
+      },
+      "elm_llm_hybrid": {
+        "avg_training_time": 0.37,
+        "avg_inference_time": 0.008,
+        "avg_api_time": 0.197,
+        "total_api_calls": 1,
+        "total_api_cost": 0.00010499999999999999,
+        "cost_per_episode": 1.05e-05
+      },
+      "cost_efficiency": {
+        "improvement_per_dollar": 0.0,
+        "roi_score": 0.0
+      }
+    }
+  }
+}
