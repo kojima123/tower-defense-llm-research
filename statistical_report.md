@@ -1,43 +1,43 @@
 # Tower Defense LLM Effect Statistical Analysis
 ==================================================
 
-## ELM Only Results (n=5)
+## ELM Only Results (n=10)
 
 **Score:**
-- Mean: 492.0 ± 26.8
-- Range: 465.2 - 518.8
+- Mean: 414.0 ± 19.0
+- Range: 395.0 - 433.0
 
 **Towers Built:**
-- Mean: 8.2 ± 0.4
+- Mean: 6.9 ± 0.3
 
 **Efficiency (Score/Tower):**
 - Mean: 60.00 ± 0.00
 
 **System Metrics:**
-- Average Confidence: 0.176
+- Average Confidence: 0.177
 - LLM Guidance Rate: 0.0%
 
-## ELM + LLM Results (n=5)
+## ELM + LLM Results (n=10)
 
 **Score:**
-- Mean: 0.0 ± 0.0
-- Range: 0.0 - 0.0
+- Mean: 84.0 ± 31.0
+- Range: 53.0 - 115.0
 
 **Towers Built:**
-- Mean: 0.0 ± 0.0
+- Mean: 1.4 ± 0.5
 
 **Efficiency (Score/Tower):**
-- Mean: 0.00 ± 0.00
+- Mean: 60.00 ± 0.00
 
 **System Metrics:**
-- Average Confidence: 0.201
-- LLM Guidance Rate: 0.0%
+- Average Confidence: 0.177
+- LLM Guidance Rate: 100.0%
 
 ## Statistical Comparison
 
-**Score Difference:** -492.0
-**Improvement:** -100.0%
-**Effect Size (Cohen's d):** -25.93
+**Score Difference:** -330.0
+**Improvement:** -79.7%
+**Effect Size (Cohen's d):** -12.85
 
 **Effect Interpretation:** Large effect
 

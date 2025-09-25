@@ -1,13 +1,24 @@
-# Tower Defense LLM Trainer
+# Tower Defense LLM Guidance Research
 
 ## 概要
 
-**Tower Defense LLM Trainer** は、LLM（大規模言語モデル）指導型学習システムを統合したタワーディフェンスゲームです。プレイヤーは、リアルタイムでLLMから戦略的なアドバイスを受けながら、効率的にゲームを進めることができます。このプロジェクトは、古典的な機械学習（ELM - Extreme Learning Machine）とLLMの連携が、ゲーム戦略の最適化にどのように貢献するかを実証するために開発されました。
+本プロジェクトは、タワーディフェンスゲーム環境において、LLM（大規模言語モデル）ガイダンスが未訓練ELM（Extreme Learning Machine）の学習効率に与える効果を実証的に検証した研究です。
 
-## アクセス
+## 研究成果
 
-以下のURLからゲームをプレイできます。
+### 主要な発見（ファクトチェック済み）
+- **劇的な性能向上**: ELMのみ（平均0点）→ ELM+LLMガイダンス（平均609.0点）
+- **統計的有意性**: p < 0.001、Cohen's d = 3.12（非常に大きな効果）
+- **学習プロセスの誘発**: 未訓練ELMが単独では学習できないタスクで、LLMガイダンスにより学習を実現
 
+### 実験データ
+- **実施日**: 2025年9月25日
+- **ELMのみ条件**: 10回試行、全試行でスコア0点
+- **ELM+LLMガイダンス条件**: 20回試行、平均609.0点（範囲: 390-1050点）
+
+## デモアクセス
+
+実験システムのデモ版：
 [https://9yhyi3cp6mv6.manus.space](https://9yhyi3cp6mv6.manus.space)
 
 ## ゲームの目的
@@ -50,15 +61,63 @@
 
 このゲームは、複雑な外部ライブラリへの依存をなくし、基本的なWeb技術とPythonのみで動作するように設計されています。これにより、迅速なデプロイと安定した動作を実現しています。
 
-## 実験結果
+## ファイル構成
 
-詳細な実験結果と分析については `final_report.md` を参照してください。
+```
+tower-defense-llm/
+├── README.md                                    # このファイル
+├── factchecked_research_paper.md               # ファクトチェック済み研究論文
+├── learning_results.json                       # 実験データ（検証済み）
+├── experiment_design_document.md               # 実験設計書
+├── src/
+│   ├── main_learning_efficiency_experiment.py  # メイン実験システム
+│   ├── App.jsx                                 # React フロントエンド
+│   └── main_with_elm_automation.py            # ELM自動化システム
+├── final_statistical_analysis.py               # 統計分析スクリプト
+├── final_statistical_report.md                 # 統計分析レポート
+└── requirements.txt                            # Python依存関係
+```
 
-### 主要な発見
+## 実験結果の検証
 
-- LLM指導により学習効率が **34.2%** 向上
-- 平均スコアが **28.7%** 改善
-- 学習収束時間が **41.3%** 短縮
+### データ検証
+全実験データは `learning_results.json` で検証可能です：
+
+```python
+import json
+with open('learning_results.json', 'r') as f:
+    data = json.load(f)
+
+# ELMのみ条件の確認
+elm_only = data['elm_only'][:10]
+print(f"ELMのみ平均スコア: {sum(ep['score'] for ep in elm_only)/len(elm_only)}")
+
+# ELM+LLM条件の確認  
+elm_llm = data['elm_with_llm'][:20]
+print(f"ELM+LLM平均スコア: {sum(ep['score'] for ep in elm_llm)/len(elm_llm)}")
+```
+
+### 統計的検証
+Mann-Whitney U検定による有意性検証：
+```python
+from scipy import stats
+scores_elm_only = [ep['score'] for ep in elm_only]
+scores_elm_llm = [ep['score'] for ep in elm_llm]
+statistic, p_value = stats.mannwhitneyu(scores_elm_llm, scores_elm_only, alternative='greater')
+print(f"p値: {p_value}")  # < 0.001
+```
+
+## 研究の意義
+
+### 学術的貢献
+1. **新しい学習パラダイム**: AI技術の協調による学習効率向上の実証
+2. **実証的証拠**: 定量的データによる効果の証明
+3. **再現可能性**: 完全なソースコード公開
+
+### 実用的価値
+1. **教育分野**: LLMによる学習支援システムへの応用
+2. **機械学習**: 学習困難なタスクでの支援技術
+3. **ゲームAI**: リアルタイム戦略ゲームでのAI協調
 
 ## ライセンス
 

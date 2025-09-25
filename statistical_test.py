@@ -221,13 +221,13 @@ class TowerDefenseStatisticalTest:
 
 def main():
     """Run statistical test"""
-    base_url = "https://0vhlizcgw7pd.manus.space"
+    base_url = "https://kkh7ikc7ewn0.manus.space"
     
     tester = TowerDefenseStatisticalTest(base_url)
     
-    # Run tests (reduced for demonstration)
-    n_tests = 5  # Increase for more reliable results
-    duration = 20  # seconds per test
+    # Run tests for reliable statistical analysis
+    n_tests = 10  # Proper sample size for statistical significance
+    duration = 15  # seconds per test (reduced for efficiency)
     
     print(f"Running statistical analysis with n={n_tests} tests per mode")
     print(f"Each test duration: {duration} seconds")

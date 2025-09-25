@@ -1,96 +1,186 @@
 {
   "elm_only": [
     {
-      "final_score": 480,
-      "towers_built": 8,
+      "final_score": 360,
+      "towers_built": 6,
       "efficiency": 60.0,
-      "predictions_count": 8,
+      "predictions_count": 6,
       "llm_guidance_rate": 0.0,
-      "avg_confidence": 0.17588035265941757,
-      "avg_placement_prob": 0.5879401763297087
+      "avg_confidence": 0.17728478964864125,
+      "avg_placement_prob": 0.5886423948243207
     },
     {
-      "final_score": 540,
-      "towers_built": 9,
+      "final_score": 420,
+      "towers_built": 7,
       "efficiency": 60.0,
-      "predictions_count": 9,
+      "predictions_count": 7,
       "llm_guidance_rate": 0.0,
-      "avg_confidence": 0.175412206996343,
-      "avg_placement_prob": 0.5877061034981715
+      "avg_confidence": 0.1764822542262277,
+      "avg_placement_prob": 0.5882411271131138
     },
     {
-      "final_score": 480,
-      "towers_built": 8,
+      "final_score": 420,
+      "towers_built": 7,
       "efficiency": 60.0,
-      "predictions_count": 8,
+      "predictions_count": 7,
       "llm_guidance_rate": 0.0,
-      "avg_confidence": 0.17588035265941757,
-      "avg_placement_prob": 0.5879401763297087
+      "avg_confidence": 0.1764822542262277,
+      "avg_placement_prob": 0.5882411271131138
     },
     {
-      "final_score": 480,
-      "towers_built": 8,
+      "final_score": 420,
+      "towers_built": 7,
       "efficiency": 60.0,
-      "predictions_count": 8,
+      "predictions_count": 7,
       "llm_guidance_rate": 0.0,
-      "avg_confidence": 0.17588035265941757,
-      "avg_placement_prob": 0.5879401763297087
+      "avg_confidence": 0.1764822542262277,
+      "avg_placement_prob": 0.5882411271131138
     },
     {
-      "final_score": 480,
-      "towers_built": 8,
+      "final_score": 420,
+      "towers_built": 7,
       "efficiency": 60.0,
-      "predictions_count": 8,
+      "predictions_count": 7,
       "llm_guidance_rate": 0.0,
-      "avg_confidence": 0.17588035265941757,
-      "avg_placement_prob": 0.5879401763297087
+      "avg_confidence": 0.1764822542262277,
+      "avg_placement_prob": 0.5882411271131138
+    },
+    {
+      "final_score": 420,
+      "towers_built": 7,
+      "efficiency": 60.0,
+      "predictions_count": 7,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.1764822542262277,
+      "avg_placement_prob": 0.5882411271131138
+    },
+    {
+      "final_score": 420,
+      "towers_built": 7,
+      "efficiency": 60.0,
+      "predictions_count": 7,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.1764822542262277,
+      "avg_placement_prob": 0.5882411271131138
+    },
+    {
+      "final_score": 420,
+      "towers_built": 7,
+      "efficiency": 60.0,
+      "predictions_count": 7,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.1764822542262277,
+      "avg_placement_prob": 0.5882411271131138
+    },
+    {
+      "final_score": 420,
+      "towers_built": 7,
+      "efficiency": 60.0,
+      "predictions_count": 7,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.1764822542262277,
+      "avg_placement_prob": 0.5882411271131138
+    },
+    {
+      "final_score": 420,
+      "towers_built": 7,
+      "efficiency": 60.0,
+      "predictions_count": 7,
+      "llm_guidance_rate": 0.0,
+      "avg_confidence": 0.1764822542262277,
+      "avg_placement_prob": 0.5882411271131138
     }
   ],
   "elm_llm": [
     {
-      "final_score": 0,
-      "towers_built": 0,
-      "efficiency": 0.0,
-      "predictions_count": 9,
-      "llm_guidance_rate": 0.0,
-      "avg_confidence": 0.2012695373229394,
-      "avg_placement_prob": 0.3993652313385303
+      "final_score": 60,
+      "towers_built": 1,
+      "efficiency": 60.0,
+      "predictions_count": 2,
+      "llm_guidance_rate": 1.0,
+      "avg_confidence": 0.18670807693838393,
+      "avg_placement_prob": 0.5062651003339262
     },
     {
-      "final_score": 0,
-      "towers_built": 0,
-      "efficiency": 0.0,
-      "predictions_count": 9,
-      "llm_guidance_rate": 0.0,
-      "avg_confidence": 0.2012695373229394,
-      "avg_placement_prob": 0.3993652313385303
+      "final_score": 60,
+      "towers_built": 1,
+      "efficiency": 60.0,
+      "predictions_count": 2,
+      "llm_guidance_rate": 1.0,
+      "avg_confidence": 0.18670807693838393,
+      "avg_placement_prob": 0.5062651003339262
     },
     {
-      "final_score": 0,
-      "towers_built": 0,
-      "efficiency": 0.0,
-      "predictions_count": 9,
-      "llm_guidance_rate": 0.0,
-      "avg_confidence": 0.2012695373229394,
-      "avg_placement_prob": 0.3993652313385303
+      "final_score": 120,
+      "towers_built": 2,
+      "efficiency": 60.0,
+      "predictions_count": 3,
+      "llm_guidance_rate": 1.0,
+      "avg_confidence": 0.17307942586874556,
+      "avg_placement_prob": 0.5284804208441957
     },
     {
-      "final_score": 0,
-      "towers_built": 0,
-      "efficiency": 0.0,
-      "predictions_count": 9,
-      "llm_guidance_rate": 0.0,
-      "avg_confidence": 0.2012695373229394,
-      "avg_placement_prob": 0.3993652313385303
+      "final_score": 60,
+      "towers_built": 1,
+      "efficiency": 60.0,
+      "predictions_count": 3,
+      "llm_guidance_rate": 1.0,
+      "avg_confidence": 0.18253134338243307,
+      "avg_placement_prob": 0.47514708751086226
     },
     {
-      "final_score": 0,
-      "towers_built": 0,
-      "efficiency": 0.0,
-      "predictions_count": 9,
-      "llm_guidance_rate": 0.0,
-      "avg_confidence": 0.2012695373229394,
-      "avg_placement_prob": 0.3993652313385303
+      "final_score": 60,
+      "towers_built": 1,
+      "efficiency": 60.0,
+      "predictions_count": 3,
+      "llm_guidance_rate": 1.0,
+      "avg_confidence": 0.18253134338243307,
+      "avg_placement_prob": 0.47514708751086226
+    },
+    {
+      "final_score": 120,
+      "towers_built": 2,
+      "efficiency": 60.0,
+      "predictions_count": 3,
+      "llm_guidance_rate": 1.0,
+      "avg_confidence": 0.17307942586874556,
+      "avg_placement_prob": 0.5284804208441957
+    },
+    {
+      "final_score": 60,
+      "towers_built": 1,
+      "efficiency": 60.0,
+      "predictions_count": 3,
+      "llm_guidance_rate": 1.0,
+      "avg_confidence": 0.18253134338243307,
+      "avg_placement_prob": 0.47514708751086226
+    },
+    {
+      "final_score": 120,
+      "towers_built": 2,
+      "efficiency": 60.0,
+      "predictions_count": 3,
+      "llm_guidance_rate": 1.0,
+      "avg_confidence": 0.17307942586874556,
+      "avg_placement_prob": 0.5284804208441957
+    },
+    {
+      "final_score": 120,
+      "towers_built": 2,
+      "efficiency": 60.0,
+      "predictions_count": 2,
+      "llm_guidance_rate": 1.0,
+      "avg_confidence": 0.17253020066785263,
+      "avg_placement_prob": 0.5862651003339263
+    },
+    {
+      "final_score": 60,
+      "towers_built": 1,
+      "efficiency": 60.0,
+      "predictions_count": 2,
+      "llm_guidance_rate": 1.0,
+      "avg_confidence": 0.16000000000000003,
+      "avg_placement_prob": 0.5196191388031182
     }
   ]
 }
