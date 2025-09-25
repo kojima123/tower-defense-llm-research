@@ -1060,15 +1060,16 @@ def elm_predict():
             game_state.get('progress', 1) / 10.0
         ]
         
-        # Get LLM guidance for llm_guided model
+        # Get LLM guidance for llm_guided and hybrid models
         llm_guidance = None
-        if model_type == 'llm_guided':
+        if model_type in ['llm_guided', 'hybrid']:
             try:
                 llm_guidance = get_real_llm_guidance(game_state)
-            except:
+            except Exception as e:
+                print(f"LLM guidance error: {e}")
                 llm_guidance = None
         
-        if model_type == 'llm_guided':
+        if model_type in ['llm_guided', 'hybrid']:
             prediction = llm_guided_elm.predict(features, llm_guidance)
         else:
             prediction = baseline_elm.predict(features)
