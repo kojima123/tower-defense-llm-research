@@ -10,10 +10,10 @@ import os
 import json
 import time
 import random
-import numpy as np
+import math
 from openai import OpenAI
 
-app = Flask(__name__, static_folder='static', static_url_path='')
+app = Flask(__name__, static_folder='../static', static_url_path='')
 CORS(app)
 
 # Initialize OpenAI client
@@ -25,66 +25,92 @@ if os.getenv('OPENAI_API_KEY'):
     except Exception as e:
         print(f"❌ OpenAI initialization failed: {e}")
 
-# Tower Defense ELM implementation
-class TowerDefenseELM:
+# Simple ELM implementation without NumPy
+class SimpleTowerDefenseELM:
     def __init__(self, input_size=8, hidden_size=20, output_size=2, random_state=42):
         """
-        ELM for Tower Defense strategy
-        Input: [money, health, wave, enemies, towers, efficiency, survival, progress]
-        Output: [place_tower_probability, tower_x_position]
+        Simple ELM for Tower Defense strategy without NumPy
         """
-        np.random.seed(random_state)
-        self.input_weights = np.random.randn(input_size, hidden_size) * 0.5
-        self.hidden_bias = np.random.randn(hidden_size) * 0.5
-        self.output_weights = np.random.randn(hidden_size, output_size) * 0.1
+        random.seed(random_state)
+        
+        # Initialize weights with random values
+        self.input_weights = []
+        for i in range(input_size):
+            row = []
+            for j in range(hidden_size):
+                row.append(random.gauss(0, 0.5))
+            self.input_weights.append(row)
+        
+        self.hidden_bias = [random.gauss(0, 0.5) for _ in range(hidden_size)]
+        
+        self.output_weights = []
+        for i in range(hidden_size):
+            row = []
+            for j in range(output_size):
+                row.append(random.gauss(0, 0.1))
+            self.output_weights.append(row)
+        
         self.learning_rate = 0.02
         
     def sigmoid(self, x):
-        return 1 / (1 + np.exp(-np.clip(x, -500, 500)))
+        try:
+            return 1 / (1 + math.exp(-max(-500, min(500, x))))
+        except:
+            return 0.5
     
     def tanh(self, x):
-        return np.tanh(np.clip(x, -500, 500))
+        try:
+            return math.tanh(max(-500, min(500, x)))
+        except:
+            return 0
     
     def predict(self, x):
-        x = np.array(x).reshape(1, -1)
         # Normalize inputs
-        x = x / np.maximum(np.abs(x), 1e-8)
+        x_norm = []
+        for val in x:
+            if abs(val) > 1e-8:
+                x_norm.append(val / abs(val))
+            else:
+                x_norm.append(val)
         
-        hidden = self.tanh(np.dot(x, self.input_weights) + self.hidden_bias)
-        output = np.dot(hidden, self.output_weights)
+        # Forward pass
+        hidden = []
+        for j in range(len(self.hidden_bias)):
+            sum_val = self.hidden_bias[j]
+            for i in range(len(x_norm)):
+                sum_val += x_norm[i] * self.input_weights[i][j]
+            hidden.append(self.tanh(sum_val))
         
-        # Apply sigmoid to tower placement probability
-        output[0, 0] = self.sigmoid(output[0, 0])
-        # Normalize tower position to [0, 1]
-        output[0, 1] = self.sigmoid(output[0, 1])
+        # Output layer
+        output = []
+        for j in range(len(self.output_weights[0])):
+            sum_val = 0
+            for i in range(len(hidden)):
+                sum_val += hidden[i] * self.output_weights[i][j]
+            output.append(sum_val)
         
-        return output[0]
+        # Apply activations
+        output[0] = self.sigmoid(output[0])
+        output[1] = self.sigmoid(output[1])
+        
+        return output
     
     def update(self, x, target, learning_rate=None):
         if learning_rate is None:
             learning_rate = self.learning_rate
-            
-        x = np.array(x).reshape(1, -1)
-        target = np.array(target).reshape(1, -1)
         
-        # Normalize inputs
-        x = x / np.maximum(np.abs(x), 1e-8)
+        # Simple weight update (simplified)
+        prediction = self.predict(x)
+        error = [target[i] - prediction[i] for i in range(len(target))]
         
-        # Forward pass
-        hidden = self.tanh(np.dot(x, self.input_weights) + self.hidden_bias)
-        output = np.dot(hidden, self.output_weights)
-        
-        # Apply activations
-        output[0, 0] = self.sigmoid(output[0, 0])
-        output[0, 1] = self.sigmoid(output[0, 1])
-        
-        # Simple gradient update
-        error = target - output
-        self.output_weights += learning_rate * np.dot(hidden.T, error)
+        # Update output weights
+        for i in range(len(self.output_weights)):
+            for j in range(len(self.output_weights[i])):
+                self.output_weights[i][j] += learning_rate * error[j] * 0.1
 
 # Global model instances
-baseline_elm = TowerDefenseELM(random_state=42)
-llm_guided_elm = TowerDefenseELM(random_state=43)
+baseline_elm = SimpleTowerDefenseELM(random_state=42)
+llm_guided_elm = SimpleTowerDefenseELM(random_state=43)
 
 # Game state tracking
 game_sessions = {}
@@ -93,10 +119,10 @@ game_sessions = {}
 def index():
     """Serve the main game page"""
     try:
-        return send_from_directory('static', 'index.html')
+        return send_from_directory('../static', 'index.html')
     except:
         # Fallback to static.html in root directory
-        return send_from_directory('.', 'static.html')
+        return send_from_directory('..', 'static.html')
 
 @app.route('/health')
 def health_check():
@@ -351,8 +377,8 @@ def evaluate_performance():
 def reset_models():
     """Reset both ELM models to initial state"""
     global baseline_elm, llm_guided_elm
-    baseline_elm = TowerDefenseELM(random_state=42)
-    llm_guided_elm = TowerDefenseELM(random_state=43)
+    baseline_elm = SimpleTowerDefenseELM(random_state=42)
+    llm_guided_elm = SimpleTowerDefenseELM(random_state=43)
     return jsonify({'status': 'reset'})
 
 if __name__ == '__main__':
