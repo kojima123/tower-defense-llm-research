@@ -210,9 +210,13 @@ def index():
     # Read the static HTML file directly
     static_html_path = os.path.join(PROJECT_DIR, 'static.html')
     
+    print(f"Looking for static HTML at: {static_html_path}")
+    print(f"File exists: {os.path.exists(static_html_path)}")
+    
     try:
         with open(static_html_path, 'r', encoding='utf-8') as f:
             html_content = f.read()
+        print(f"Successfully loaded HTML file ({len(html_content)} characters)")
         return Response(html_content, mimetype='text/html')
     except Exception as e:
         print(f"Error reading static HTML: {e}")
