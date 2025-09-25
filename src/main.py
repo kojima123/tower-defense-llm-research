@@ -106,10 +106,30 @@ llm_guided_elm = SimpleTowerDefenseELM(random_state=43)
 def index():
     """Serve the main game page"""
     try:
-        return send_from_directory('../static', 'index.html')
+        # Try to serve from static directory first
+        with open('../static/index.html', 'r', encoding='utf-8') as f:
+            return f.read()
     except:
-        # Fallback to static.html in root directory
-        return send_from_directory('..', 'static.html')
+        try:
+            # Fallback to static.html in root directory
+            with open('../static.html', 'r', encoding='utf-8') as f:
+                return f.read()
+        except:
+            return """
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower Defense LLM Trainer</title>
+</head>
+<body>
+    <h1>Tower Defense LLM Trainer</h1>
+    <p>ゲームを読み込み中...</p>
+    <p>静的ファイルの読み込みに問題が発生しました。</p>
+</body>
+</html>
+            """
 
 @app.route('/health')
 def health_check():
