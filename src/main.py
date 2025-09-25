@@ -1,35 +1,25 @@
 #!/usr/bin/env python3
 """
-Flask server for Tower Defense LLM Trainer - Deployment Version
-Handles LLM guidance requests and ELM integration for tower defense game
+Flask server for Tower Defense LLM Trainer - Simple Deployment Version
+Handles rule-based guidance without external dependencies
 """
 
-from flask import Flask, request, jsonify, send_from_directory, render_template_string
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 import json
 import time
 import random
 import math
-from openai import OpenAI
 
 app = Flask(__name__, static_folder='../static', static_url_path='')
 CORS(app)
 
-# Initialize OpenAI client
-client = None
-if os.getenv('OPENAI_API_KEY'):
-    try:
-        client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-        print("✅ OpenAI client initialized")
-    except Exception as e:
-        print(f"❌ OpenAI initialization failed: {e}")
-
-# Simple ELM implementation without NumPy
+# Simple ELM implementation without external dependencies
 class SimpleTowerDefenseELM:
     def __init__(self, input_size=8, hidden_size=20, output_size=2, random_state=42):
         """
-        Simple ELM for Tower Defense strategy without NumPy
+        Simple ELM for Tower Defense strategy
         """
         random.seed(random_state)
         
@@ -112,9 +102,6 @@ class SimpleTowerDefenseELM:
 baseline_elm = SimpleTowerDefenseELM(random_state=42)
 llm_guided_elm = SimpleTowerDefenseELM(random_state=43)
 
-# Game state tracking
-game_sessions = {}
-
 @app.route('/')
 def index():
     """Serve the main game page"""
@@ -129,90 +116,25 @@ def health_check():
     """Health check endpoint"""
     return jsonify({
         'status': 'healthy',
-        'openai_available': client is not None,
+        'openai_available': False,
         'timestamp': time.time()
     })
 
 @app.route('/api/llm-guidance', methods=['POST'])
 def get_llm_guidance():
-    """Get strategic guidance from LLM based on current game state"""
+    """Get strategic guidance based on current game state"""
     try:
         data = request.json
         game_state = data['game_state']
         
-        if not client:
-            # Fallback to rule-based guidance
-            return get_rule_based_guidance(game_state)
-        
-        try:
-            prompt = f"""
-あなたはタワーディフェンスゲームの戦略アドバイザーです。現在のゲーム状況を分析し、最適な戦略を提案してください。
-
-現在の状況:
-- 資金: ${game_state['money']}
-- ヘルス: {game_state['health']}
-- ウェーブ: {game_state['wave']}
-- 敵の数: {game_state['enemies']}
-- タワー数: {game_state['towers']}
-- スコア: {game_state['score']}
-- 効率性: {game_state.get('efficiency', 0):.2f}
-- 生存率: {game_state.get('survival', 1):.2f}
-
-タワーコスト: $50
-タワーダメージ: 60
-タワー射程: 150
-
-以下の形式で回答してください:
-優先度: [urgent/high/medium/low]
-推奨行動: [具体的な行動]
-理由: [戦略的な理由]
-"""
-            
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=200,
-                temperature=0.7
-            )
-            
-            content = response.choices[0].message.content.strip()
-            
-            # Parse LLM response
-            lines = content.split('\n')
-            priority = 'medium'
-            recommendation = 'タワーを配置してください'
-            reasoning = '防御を強化する必要があります'
-            
-            for line in lines:
-                if '優先度:' in line:
-                    priority_text = line.split(':', 1)[1].strip()
-                    if 'urgent' in priority_text or '緊急' in priority_text:
-                        priority = 'urgent'
-                    elif 'high' in priority_text or '高' in priority_text:
-                        priority = 'high'
-                    elif 'low' in priority_text or '低' in priority_text:
-                        priority = 'low'
-                elif '推奨行動:' in line or '推奨' in line:
-                    recommendation = line.split(':', 1)[1].strip()
-                elif '理由:' in line:
-                    reasoning = line.split(':', 1)[1].strip()
-            
-            return jsonify({
-                'recommendation': recommendation,
-                'reasoning': reasoning,
-                'priority': priority,
-                'source': 'llm'
-            })
-            
-        except Exception as e:
-            print(f"LLM guidance failed: {e}")
-            return get_rule_based_guidance(game_state)
+        # Rule-based guidance system
+        return get_rule_based_guidance(game_state)
             
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 def get_rule_based_guidance(game_state):
-    """Fallback rule-based guidance system"""
+    """Rule-based guidance system"""
     money = game_state['money']
     health = game_state['health']
     wave = game_state['wave']
@@ -382,7 +304,6 @@ def reset_models():
     return jsonify({'status': 'reset'})
 
 if __name__ == '__main__':
-    print("🚀 Starting Tower Defense LLM Trainer Server (Deployment)")
-    print(f"🔑 OpenAI API: {'✅ Available' if client else '❌ Not available'}")
+    print("🚀 Starting Tower Defense LLM Trainer Server (Simple Deployment)")
     print("🎮 Game available at: http://0.0.0.0:5000")
     app.run(host='0.0.0.0', port=5000, debug=False)
