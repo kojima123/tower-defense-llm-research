@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Tower Defense ELM - Simple API Key Input Version
+Tower Defense ELM - No Alert Auto Restart Version
 """
 
 import os
@@ -47,12 +47,12 @@ class AutoELM:
         self.llm_guidance_count = 0
         self.last_guidance = ""
         
-        # Forced automation parameters
-        self.action_threshold = 0.3
-        self.forced_action_interval = 3000
-        self.llm_guidance_weight = 0.8
+        # Forced automation parameters - More aggressive
+        self.action_threshold = 0.2  # Lower threshold for more actions
+        self.forced_action_interval = 2000  # 2 seconds
+        self.llm_guidance_weight = 0.9  # Higher LLM weight
         
-        print(f"🤖 AutoELM初期化完了")
+        print(f"🤖 AutoELM初期化完了 (強制実行モード)")
     
     def _initialize_weights(self, n_features):
         """Initialize ELM weights"""
@@ -81,7 +81,8 @@ class AutoELM:
                 self.llm_guidance_count += 1
                 self.last_guidance = llm_guidance
             
-            should_place = output[2] > self.action_threshold or np.random.random() < 0.4
+            # More aggressive placement
+            should_place = output[2] > self.action_threshold or np.random.random() < 0.7
             x = max(0.1, min(0.9, self._sigmoid(output[0])))
             y = max(0.1, min(0.9, self._sigmoid(output[1])))
             
@@ -101,7 +102,7 @@ class AutoELM:
                 'x': random.uniform(0.2, 0.8),
                 'y': random.uniform(0.2, 0.8),
                 'should_place': True,
-                'confidence': 0.5,
+                'confidence': 0.8,
                 'llm_guided': False
             }
     
@@ -292,11 +293,40 @@ def index():
             background: #27ae60;
             color: white;
         }
+        .game-over-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .game-over-message {
+            background: #2c3e50;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
     <h1>🎮 Tower Defense ELM Trainer</h1>
     <p style="text-align: center; margin-bottom: 30px;">AIが学ぶ次世代タワーディフェンスゲーム</p>
+    
+    <!-- Game Over Overlay -->
+    <div id="gameOverOverlay" class="game-over-overlay">
+        <div class="game-over-message">
+            <h2 id="gameOverTitle">ゲームオーバー！</h2>
+            <p id="gameOverScore">スコア: 0</p>
+            <p id="gameOverCountdown">自動再開まで: 3秒</p>
+        </div>
+    </div>
     
     <div class="container">
         <div class="game-area">
@@ -310,7 +340,7 @@ def index():
         </div>
         
         <div class="control-panel">
-            <!-- API Key Section - Prominently placed at top -->
+            <!-- API Key Section -->
             <div class="api-section">
                 <h4 style="margin-top: 0; color: #fff; font-size: 18px;">🔑 OpenAI API設定</h4>
                 <p style="margin: 10px 0; font-size: 14px;">LLMガイダンス機能を使用するにはAPIキーが必要です</p>
@@ -354,12 +384,12 @@ def index():
             
             <div class="auto-indicator">
                 <strong>🔧 ELM自動実行: 有効</strong><br>
-                <small>3秒間隔で強制実行</small>
+                <small>2秒間隔で強制実行</small>
             </div>
             
             <div class="auto-indicator">
                 <strong>🔄 自動再開: 有効</strong><br>
-                <small>ライフ0で2秒後に自動再開</small>
+                <small>ライフ0で3秒後に自動再開</small>
             </div>
             
             <h4>ゲームモード</h4>
@@ -415,6 +445,7 @@ def index():
         let gameLoop = null;
         let elmLoop = null;
         let autoRestartTimeout = null;
+        let gameOverCountdown = null;
         
         // Canvas setup
         const canvas = document.getElementById('gameCanvas');
@@ -461,13 +492,13 @@ def index():
                 elmStatus.textContent = '有効 (単独)';
                 if (gameState.running) {
                     clearInterval(elmLoop);
-                    elmLoop = setInterval(runELMAutomation, 3000);
+                    elmLoop = setInterval(runELMAutomation, 2000); // 2 seconds
                 }
             } else if (mode === 'elm_llm') {
                 elmStatus.textContent = '有効 (hybrid)';
                 if (gameState.running) {
                     clearInterval(elmLoop);
-                    elmLoop = setInterval(runELMAutomation, 3000);
+                    elmLoop = setInterval(runELMAutomation, 2000); // 2 seconds
                 }
             }
             
@@ -482,6 +513,9 @@ def index():
             gameState.running = true;
             gameState.paused = false;
             
+            // Hide game over overlay
+            document.getElementById('gameOverOverlay').style.display = 'none';
+            
             if (!experimentData.startTime) {
                 experimentData.startTime = Date.now();
             }
@@ -491,8 +525,8 @@ def index():
             
             if (gameState.mode !== 'manual') {
                 clearInterval(elmLoop);
-                elmLoop = setInterval(runELMAutomation, 3000);
-                setTimeout(runELMAutomation, 1000);
+                elmLoop = setInterval(runELMAutomation, 2000); // 2 seconds
+                setTimeout(runELMAutomation, 500); // Start immediately
             }
             
             updateGuidance('ゲーム開始！ELM自動配置が有効です');
@@ -510,7 +544,7 @@ def index():
             } else {
                 gameLoop = setInterval(updateGame, 100);
                 if (gameState.mode !== 'manual') {
-                    elmLoop = setInterval(runELMAutomation, 3000);
+                    elmLoop = setInterval(runELMAutomation, 2000);
                 }
                 updateGuidance('ゲーム再開！');
             }
@@ -533,13 +567,17 @@ def index():
             clearInterval(gameLoop);
             clearInterval(elmLoop);
             clearTimeout(autoRestartTimeout);
+            clearInterval(gameOverCountdown);
+            
+            // Hide game over overlay
+            document.getElementById('gameOverOverlay').style.display = 'none';
             
             updateDisplay();
             updateGuidance('ゲームがリセットされました');
             draw();
         }
         
-        // ELM automation function
+        // ELM automation function - More aggressive
         function runELMAutomation() {
             if (!gameState.running || gameState.mode === 'manual') return;
             
@@ -578,7 +616,8 @@ def index():
             })
             .catch(error => {
                 console.error('ELM API エラー:', error);
-                if (gameState.money >= 50 && Math.random() < 0.6) {
+                // More aggressive fallback
+                if (gameState.money >= 50 && Math.random() < 0.8) {
                     const x = Math.random() * (canvas.width - 100) + 50;
                     const y = Math.random() * (canvas.height - 100) + 50;
                     placeTower(x, y);
@@ -669,27 +708,52 @@ def index():
             clearInterval(gameLoop);
             clearInterval(elmLoop);
             clearTimeout(autoRestartTimeout);
+            clearInterval(gameOverCountdown);
             
             console.log(`ゲームオーバー！スコア: ${gameState.score}点, 試行: ${experimentData.trialCount}`);
+            
+            // Show game over overlay instead of alert
+            const overlay = document.getElementById('gameOverOverlay');
+            const title = document.getElementById('gameOverTitle');
+            const score = document.getElementById('gameOverScore');
+            const countdown = document.getElementById('gameOverCountdown');
+            
+            title.textContent = 'ゲームオーバー！';
+            score.textContent = `スコア: ${gameState.score}点`;
+            overlay.style.display = 'flex';
+            
             updateGuidance(`ゲームオーバー！スコア: ${gameState.score}点`);
             
+            // Auto restart for ELM modes
             if (gameState.mode === 'elm_only' || gameState.mode === 'elm_llm') {
                 experimentData.autoRestart = true;
             }
             
             if (experimentData.autoRestart) {
-                updateGuidance(`2秒後に自動再開します... (試行 ${experimentData.trialCount + 1})`);
-                console.log('自動再開タイマー開始...');
+                let countdownSeconds = 3;
+                countdown.textContent = `自動再開まで: ${countdownSeconds}秒`;
                 
-                autoRestartTimeout = setTimeout(() => {
-                    console.log('自動再開実行中...');
-                    resetGame();
-                    setTimeout(() => {
-                        startGame();
-                        updateGuidance(`自動再開完了！試行 ${experimentData.trialCount}`);
-                    }, 500);
-                }, 2000);
+                gameOverCountdown = setInterval(() => {
+                    countdownSeconds--;
+                    countdown.textContent = `自動再開まで: ${countdownSeconds}秒`;
+                    
+                    if (countdownSeconds <= 0) {
+                        clearInterval(gameOverCountdown);
+                        overlay.style.display = 'none';
+                        
+                        console.log('自動再開実行中...');
+                        resetGame();
+                        setTimeout(() => {
+                            startGame();
+                            updateGuidance(`自動再開完了！試行 ${experimentData.trialCount}`);
+                        }, 500);
+                    }
+                }, 1000);
+                
+                updateGuidance(`3秒後に自動再開します... (試行 ${experimentData.trialCount + 1})`);
+                console.log('自動再開タイマー開始...');
             } else {
+                countdown.textContent = '手動で再開してください';
                 updateGuidance(`ゲーム終了。手動で再開してください。`);
             }
         }
@@ -843,7 +907,7 @@ def elm_predict():
             'x': random.uniform(0.2, 0.8),
             'y': random.uniform(0.2, 0.8),
             'should_place': True,
-            'confidence': 0.5,
+            'confidence': 0.8,
             'error': str(e)
         })
 
