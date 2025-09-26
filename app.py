@@ -386,12 +386,14 @@ def index():
                 <small>ライフ0で2秒後に自動再開</small>
             </div>
             
+
+            
             <h4>🔑 OpenAI API設定</h4>
             <input type="password" id="apiKeyInput" placeholder="OpenAI APIキーを入力" 
-                   style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            <button class="button" onclick="setApiKey()" style="background: #27ae60;">🔧 APIキー設定</button>
-            <div id="apiStatus" style="margin: 10px 0; padding: 8px; border-radius: 4px; background: #e74c3c; color: white; font-size: 12px;">
-                APIキー未設定
+                   style="width: 100%; padding: 10px; margin-bottom: 10px; border: 2px solid #3498db; border-radius: 8px; font-size: 14px;">
+            <button class="button" onclick="setApiKey()" style="background: #27ae60; width: 100%; margin-bottom: 10px;">🔧 APIキー設定</button>
+            <div id="apiStatus" style="margin: 10px 0; padding: 10px; border-radius: 8px; background: #e74c3c; color: white; font-size: 14px; text-align: center; font-weight: bold;">
+                ⚠️ APIキー未設定 - LLM機能が無効です
             </div>
             
             <h4>ゲームモード</h4>
