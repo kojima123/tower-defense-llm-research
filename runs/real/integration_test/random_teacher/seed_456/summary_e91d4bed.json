@@ -1,0 +1,14 @@
+{
+  "condition": "random_teacher",
+  "episodes": 2,
+  "seed": 456,
+  "total_time": 1.729151964187622,
+  "episode_scores": [
+    2900,
+    2900
+  ],
+  "mean_score": 2900.0,
+  "learning_success_rate": 1.0,
+  "config_hash": "e91d4bed",
+  "timestamp": 1758866145.5625513
+}

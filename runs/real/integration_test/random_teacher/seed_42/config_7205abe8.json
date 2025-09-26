@@ -1,0 +1,9 @@
+{
+  "condition": "random_teacher",
+  "seed": 42,
+  "episodes": 2,
+  "env_version": "1.0",
+  "agent_version": "1.0",
+  "prompt_version": "random_v1.0",
+  "model_name": "gpt-4o-mini"
+}

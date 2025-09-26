@@ -1,0 +1,14 @@
+{
+  "condition": "rule_teacher",
+  "episodes": 2,
+  "seed": 123,
+  "total_time": 2.0173003673553467,
+  "episode_scores": [
+    3000,
+    3000
+  ],
+  "mean_score": 3000.0,
+  "learning_success_rate": 1.0,
+  "config_hash": "ef640b85",
+  "timestamp": 1758866137.978811
+}
