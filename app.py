@@ -28,14 +28,44 @@ except ImportError:
     client = None
     print("⚠️ OpenAI library not installed. Using fallback guidance system.")
 
-# Tower Defense ELM implementation
-class TowerDefenseELM:
-    def __init__(self, input_size=8, hidden_size=20, output_size=2, random_state=42):
-        np.random.seed(random_state)
-        self.input_weights = np.random.randn(input_size, hidden_size) * 0.5
-        self.hidden_bias = np.random.randn(hidden_size) * 0.5
-        self.output_weights = np.random.randn(hidden_size, output_size) * 0.1
-        self.learning_rate = 0.02
+# Learning-capable ELM implementation with forced automation
+class AutoELM:
+    def __init__(self, input_size=8, hidden_size=20, output_size=3, random_state=None):
+        """
+        Auto-executing ELM for Tower Defense with guaranteed automation
+        """
+        if random_state is not None:
+            random.seed(random_state)
+            np.random.seed(random_state)
+        
+        # Initialize random weights (untrained state)
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.output_size = output_size
+        
+        self.input_weights = np.random.normal(0, 1.0, (input_size, hidden_size))
+        self.hidden_bias = np.random.normal(0, 1.0, hidden_size)
+        self.output_weights = np.random.normal(0, 0.1, (hidden_size, output_size))
+        
+        # Learning parameters
+        self.learning_rate = 0.01
+        self.llm_guidance_weight = 0.8  # Higher weight for LLM guidance
+        self.experience_buffer = []
+        self.max_buffer_size = 1000
+        
+        # Auto-execution parameters
+        self.action_threshold = 0.3  # Lower threshold for more actions
+        self.forced_action_interval = 5000  # Force action every 5 seconds
+        self.last_action_time = 0
+        
+        # Learning efficiency tracking
+        self.learning_history = []
+        self.performance_history = []
+        self.learning_start_time = time.time()
+        self.total_learning_updates = 0
+        self.llm_guidance_count = 0
+        
+        self.last_guidance = None
         
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-np.clip(x, -500, 500)))
@@ -43,38 +73,149 @@ class TowerDefenseELM:
     def tanh(self, x):
         return np.tanh(np.clip(x, -500, 500))
     
-    def predict(self, x):
-        x = np.array(x).reshape(1, -1)
-        x = x / np.maximum(np.abs(x), 1e-8)
+    def predict(self, x, llm_guidance=None):
+        """Predict action with guaranteed automation"""
+        # Convert to numpy array and normalize
+        x = np.array(x)
+        x_norm = np.clip(x / (np.abs(x) + 1e-8), -10, 10)
         
-        hidden = self.tanh(np.dot(x, self.input_weights) + self.hidden_bias)
+        # Forward pass
+        hidden = self.tanh(np.dot(x_norm, self.input_weights) + self.hidden_bias)
         output = np.dot(hidden, self.output_weights)
         
-        output[0, 0] = self.sigmoid(output[0, 0])
-        output[0, 1] = self.sigmoid(output[0, 1])
+        # Apply activations
+        output[0] = self.sigmoid(output[0])  # should_place_tower
+        output[1] = self.sigmoid(output[1])  # position_x_ratio
+        output[2] = self.sigmoid(output[2])  # position_y_ratio
         
-        return output[0]
-    
-    def update(self, x, target, learning_rate=None):
-        if learning_rate is None:
-            learning_rate = self.learning_rate
+        # Force action if enough time has passed
+        current_time = time.time() * 1000
+        if current_time - self.last_action_time > self.forced_action_interval:
+            output[0] = 0.9  # Force tower placement
+            self.last_action_time = current_time
+            print("🔥 ELM強制実行: 時間間隔による自動配置")
+        
+        # Apply LLM guidance if available
+        if llm_guidance:
+            self.llm_guidance_count += 1
+            self.last_guidance = llm_guidance
+            guidance_influence = self._interpret_llm_guidance(llm_guidance)
             
-        x = np.array(x).reshape(1, -1)
-        target = np.array(target).reshape(1, -1)
-        x = x / np.maximum(np.abs(x), 1e-8)
+            # Blend ELM output with LLM guidance (higher weight)
+            output[0] = output[0] * (1 - self.llm_guidance_weight) + guidance_influence['should_place'] * self.llm_guidance_weight
+            output[1] = output[1] * (1 - self.llm_guidance_weight) + guidance_influence['pos_x'] * self.llm_guidance_weight
+            output[2] = output[2] * (1 - self.llm_guidance_weight) + guidance_influence['pos_y'] * self.llm_guidance_weight
+            
+            # Store experience for learning
+            self._store_experience(x_norm, output, guidance_influence, reward=1.0)
+            
+            print(f"🧠 LLMガイダンス適用: {llm_guidance.get('recommendation', 'N/A')}")
         
-        hidden = self.tanh(np.dot(x, self.input_weights) + self.hidden_bias)
-        output = np.dot(hidden, self.output_weights)
+        # Lower threshold for more frequent actions
+        if output[0] < self.action_threshold:
+            output[0] = self.action_threshold + 0.2
         
-        output[0, 0] = self.sigmoid(output[0, 0])
-        output[0, 1] = self.sigmoid(output[0, 1])
+        return output.tolist()
+    
+    def _interpret_llm_guidance(self, guidance):
+        """Interpret LLM guidance into actionable parameters with high urgency"""
+        priority = guidance.get('priority', 'high')
+        recommendation = guidance.get('recommendation', '').lower()
         
-        error = target - output
-        self.output_weights += learning_rate * np.dot(hidden.T, error)
+        # Map priority to urgency (higher values)
+        priority_map = {
+            'urgent': 0.95,
+            'high': 0.85,
+            'medium': 0.7,
+            'low': 0.5
+        }
+        urgency = priority_map.get(priority, 0.7)
+        
+        # Analyze recommendation for action cues
+        should_place = 0.8  # Default high probability
+        if any(word in recommendation for word in ['配置', 'タワー', '設置', '購入', 'place', 'tower']):
+            should_place = 0.9
+        if any(word in recommendation for word in ['急', '緊急', 'urgent', 'すぐ', '即座']):
+            should_place = 0.95
+        
+        # Position strategy (prefer center-left for better coverage)
+        pos_x = random.uniform(0.3, 0.7)  # Center-left to center-right
+        pos_y = random.uniform(0.3, 0.7)  # Center area
+        
+        return {
+            'should_place': should_place,
+            'pos_x': pos_x,
+            'pos_y': pos_y,
+            'urgency': urgency
+        }
+    
+    def _store_experience(self, state, action, guidance, reward):
+        """Store experience for learning"""
+        experience = {
+            'state': state.copy(),
+            'action': action.copy(),
+            'guidance': guidance.copy(),
+            'reward': reward,
+            'timestamp': time.time()
+        }
+        
+        self.experience_buffer.append(experience)
+        if len(self.experience_buffer) > self.max_buffer_size:
+            self.experience_buffer.pop(0)
+    
+    def learn_from_experience(self, current_score):
+        """Learn from recent experiences"""
+        if len(self.experience_buffer) < 5:
+            return
+        
+        # Simple learning: adjust weights based on recent performance
+        recent_experiences = self.experience_buffer[-5:]
+        
+        for exp in recent_experiences:
+            # Positive reinforcement for good guidance
+            if exp['reward'] > 0:
+                learning_signal = exp['reward'] * self.learning_rate
+                
+                # Update output weights slightly
+                guidance_vector = np.array([
+                    exp['guidance']['should_place'],
+                    exp['guidance']['pos_x'],
+                    exp['guidance']['pos_y']
+                ])
+                
+                # Small weight adjustment
+                adjustment = np.outer(np.ones(self.hidden_size), guidance_vector) * learning_signal * 0.01
+                self.output_weights += adjustment
+        
+        self.total_learning_updates += 1
+        
+        # Record learning metrics
+        learning_time = time.time() - self.learning_start_time
+        self.learning_history.append({
+            'time': learning_time,
+            'updates': self.total_learning_updates,
+            'score': current_score,
+            'guidance_count': self.llm_guidance_count
+        })
+        
+        print(f"📚 学習更新: {self.total_learning_updates}回, スコア: {current_score}")
+    
+    def get_learning_efficiency_metrics(self):
+        """Get current learning efficiency metrics"""
+        current_time = time.time() - self.learning_start_time
+        
+        return {
+            'learning_time': current_time,
+            'learning_updates': self.total_learning_updates,
+            'llm_guidance_count': self.llm_guidance_count,
+            'learning_rate': self.total_learning_updates / max(current_time, 1) * 60,  # per minute
+            'efficiency_score': self.llm_guidance_count / max(current_time, 1) * 60,  # guidance per minute
+            'last_guidance': self.last_guidance
+        }
 
 # Global model instances
-baseline_elm = TowerDefenseELM(random_state=42)
-llm_guided_elm = TowerDefenseELM(random_state=43)
+baseline_elm = AutoELM(random_state=42)
+llm_guided_elm = AutoELM(random_state=43)
 
 @app.route('/')
 def index():
@@ -713,3 +854,111 @@ if __name__ == '__main__':
     print("📊 Learning efficiency experiment ready")
     print(f"🌐 Server starting on port {port}")
     app.run(host='0.0.0.0', port=port, debug=True)
+
+@app.route('/api/elm-predict', methods=['POST'])
+def elm_predict():
+    """Get ELM prediction for tower placement with guaranteed automation"""
+    try:
+        data = request.json
+        
+        # Get LLM guidance if in elm_llm mode
+        llm_guidance = None
+        if data.get('mode') == 'elm_llm':
+            llm_guidance_response = get_llm_guidance()
+            if llm_guidance_response.status_code == 200:
+                llm_guidance = llm_guidance_response.get_json()
+        
+        # Prepare features for ELM
+        features = [
+            data.get('money', 0) / 100.0,  # Normalized money
+            data.get('health', 100) / 100.0,  # Normalized health
+            data.get('wave', 1) / 10.0,     # Normalized wave
+            data.get('score', 0) / 1000.0,  # Normalized score
+            data.get('towers', 0) / 20.0,   # Normalized tower count
+            data.get('enemies', 0) / 50.0,  # Normalized enemy count
+            1.0 if llm_guidance else 0.0,  # LLM guidance available
+            time.time() % 100 / 100.0  # Time factor for variation
+        ]
+        
+        # Select appropriate ELM model
+        if data.get('mode') == 'elm_only':
+            prediction = baseline_elm.predict(features)
+        else:
+            prediction = llm_guided_elm.predict(features, llm_guidance)
+        
+        return jsonify({
+            'should_place_tower': prediction[0] > 0.5,
+            'position_x_ratio': prediction[1],
+            'position_y_ratio': prediction[2],
+            'raw_output': prediction,
+            'llm_guidance_used': llm_guidance is not None,
+            'llm_guidance': llm_guidance
+        })
+        
+    except Exception as e:
+        print(f"ELM prediction error: {e}")
+        return jsonify({
+            'should_place_tower': True,  # Force action on error
+            'position_x_ratio': 0.5,
+            'position_y_ratio': 0.5,
+            'error': str(e)
+        }), 500
+
+@app.route('/api/learn-from-experience', methods=['POST'])
+def learn_from_experience():
+    """Trigger learning from recent experiences"""
+    try:
+        data = request.json
+        mode = data.get('mode', 'elm_only')
+        current_score = data.get('current_score', 0)
+        
+        # Select appropriate model and trigger learning
+        if mode == 'elm_only':
+            baseline_elm.learn_from_experience(current_score)
+        else:
+            llm_guided_elm.learn_from_experience(current_score)
+        
+        return jsonify({'status': 'learning_updated'})
+        
+    except Exception as e:
+        print(f"Learning error: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/learning-metrics', methods=['POST'])
+def learning_metrics():
+    """Get current learning efficiency metrics"""
+    try:
+        data = request.json
+        mode = data.get('mode', 'elm_only')
+        
+        # Select appropriate model
+        if mode == 'elm_only':
+            metrics = baseline_elm.get_learning_efficiency_metrics()
+        else:
+            metrics = llm_guided_elm.get_learning_efficiency_metrics()
+        
+        return jsonify(metrics)
+        
+    except Exception as e:
+        print(f"Learning metrics error: {e}")
+        return jsonify({}), 500
+
+@app.route('/api/reset-learning', methods=['POST'])
+def reset_learning():
+    """Reset learning model for new trial"""
+    try:
+        data = request.json
+        mode = data.get('mode', 'elm_only')
+        
+        # Reset appropriate model
+        global baseline_elm, llm_guided_elm
+        if mode == 'elm_only':
+            baseline_elm = AutoELM(random_state=42)
+        else:
+            llm_guided_elm = AutoELM(random_state=43)
+        
+        return jsonify({'status': 'model_reset'})
+        
+    except Exception as e:
+        print(f"Model reset error: {e}")
+        return jsonify({'error': str(e)}), 500
