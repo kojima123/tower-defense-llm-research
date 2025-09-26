@@ -356,7 +356,12 @@ def reset_models():
     return jsonify({'status': 'reset'})
 
 if __name__ == '__main__':
-    print("🚀 Starting Tower Defense LLM Trainer Server (Deployment)")
-    print(f"🔑 OpenAI API: {'✅ Available' if client else '❌ Not available'}")
-    print("🎮 Game available at: http://0.0.0.0:5000")
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    import sys
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+    print("🚀 Tower Defense ELM Auto-Fix Server Starting...")
+    print(f"🔑 OpenAI API Key: {'✅ Configured' if client else '❌ Using fallback'}")
+    print("🔧 Auto-Fix: ELMの自動動作を強制実行")
+    print("🔄 Auto-Restart: ライフ0で自動再開")
+    print("📊 Learning efficiency experiment ready")
+    print(f"🌐 Server starting on port {port}")
+    app.run(host='0.0.0.0', port=port, debug=True)

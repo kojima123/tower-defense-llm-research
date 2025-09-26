@@ -451,6 +451,10 @@ def index():
             <div class="automation-indicator" id="automationIndicator">
                 🤖 ELM自動化: 待機中
             </div>
+            
+            <div class="automation-indicator" style="background: #fff3cd; border-left-color: #ffc107;">
+                🔄 自動再開: ライフ0で自動的に次のゲーム開始
+            </div>
         </div>
         
         <div class="control-panel">
@@ -583,6 +587,7 @@ def index():
         function startExperiment() {
             if (!experimentState.startTime) {
                 experimentState.startTime = Date.now();
+                experimentState.trialCount = 0; // Reset trial count for new experiment
             }
             
             experimentState.currentTrialStart = Date.now();
@@ -591,8 +596,10 @@ def index():
             initGame();
             gameState.isRunning = true;
             
-            // Reset learning model for new trial
-            resetLearningModel();
+            // Reset learning model for new experiment (not for auto-restarts)
+            if (experimentState.trialCount === 1) {
+                resetLearningModel();
+            }
             
             // Update UI
             updateExperimentUI();
@@ -600,14 +607,10 @@ def index():
             // Start game loop
             gameLoop();
             
-            // Auto-stop trial after duration
-            setTimeout(() => {
-                stopTrial();
-            }, experimentState.trialDuration);
-            
             console.log('🚀 実験開始:', {
                 mode: experimentState.mode,
-                trial: experimentState.trialCount
+                trial: experimentState.trialCount,
+                auto_restart_enabled: true
             });
         }
         
@@ -761,6 +764,12 @@ def index():
         function gameLoop() {
             if (!gameState.isRunning) return;
             
+            // Check for game over (health <= 0)
+            if (gameState.health <= 0) {
+                handleGameOver();
+                return;
+            }
+            
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
@@ -800,6 +809,82 @@ def index():
             
             // Continue loop
             requestAnimationFrame(gameLoop);
+        }
+        
+        // Handle game over and auto-restart
+        function handleGameOver() {
+            console.log('💀 ゲームオーバー: ヘルス0', {
+                score: gameState.score,
+                towers: gameState.towers.length,
+                trial: experimentState.trialCount
+            });
+            
+            // Record current game results
+            recordGameResult();
+            
+            // Auto-restart after short delay
+            setTimeout(() => {
+                console.log('🔄 自動再開: 新しいゲームを開始');
+                restartGame();
+            }, 2000); // 2 second delay
+        }
+        
+        // Record game result
+        function recordGameResult() {
+            getLearningMetrics().then(metrics => {
+                const gameResult = {
+                    mode: experimentState.mode,
+                    trial: experimentState.trialCount,
+                    score: gameState.score,
+                    health: gameState.health,
+                    towers: gameState.towers.length,
+                    duration: Date.now() - experimentState.currentTrialStart,
+                    timestamp: new Date().toISOString(),
+                    learning_metrics: metrics,
+                    end_reason: 'health_zero'
+                };
+                
+                experimentState.results.push(gameResult);
+                experimentState.learningData.push(metrics);
+                
+                console.log('📊 ゲーム結果記録:', gameResult);
+                updateExperimentResults();
+            });
+        }
+        
+        // Restart game (preserving learning state)
+        function restartGame() {
+            // Reset game state but preserve learning
+            gameState = {
+                money: 100,
+                health: 100,
+                wave: 1,
+                score: 0,
+                towers: [],
+                enemies: [],
+                projectiles: [],
+                isRunning: true,
+                lastSpawn: Date.now(),
+                spawnInterval: 2000,
+                lastAutomationTime: 0,
+                automationInterval: 1000
+            };
+            
+            // Increment trial count
+            experimentState.trialCount++;
+            experimentState.currentTrialStart = Date.now();
+            
+            // Update UI
+            updateExperimentUI();
+            updateUI();
+            
+            // Continue game loop
+            gameLoop();
+            
+            console.log('✅ ゲーム再開完了:', {
+                trial: experimentState.trialCount,
+                mode: experimentState.mode
+            });
         }
         
         // ELM automation with guaranteed execution
