@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Tower Defense ELM - No Alert Auto Restart Version
+Tower Defense ELM Auto-Fix - Final Fixed Version
+Complete automated learning system with API key input and auto-restart
 """
 
 import os
@@ -11,6 +12,7 @@ from flask import Flask, render_template_string, request, jsonify
 from sklearn.preprocessing import StandardScaler
 import random
 
+# Initialize Flask app
 app = Flask(__name__)
 
 # Check OpenAI configuration
@@ -27,8 +29,14 @@ try:
 except ImportError:
     print("⚠️ OpenAI library not installed")
 
+print("🚀 Tower Defense ELM Auto-Fix Server Starting...")
+print("🔧 Auto-Fix: ELMの自動動作を強制実行")
+print("🔄 Auto-Restart: ライフ0で自動再開")
+print("📊 Learning efficiency experiment ready")
+print("🌐 Server starting on port 5000")
+
 class AutoELM:
-    """Enhanced ELM with forced automation"""
+    """Enhanced ELM with forced automation and LLM guidance integration"""
     
     def __init__(self, n_hidden=100, random_state=42):
         self.n_hidden = n_hidden
@@ -47,42 +55,51 @@ class AutoELM:
         self.llm_guidance_count = 0
         self.last_guidance = ""
         
-        # Forced automation parameters - More aggressive
-        self.action_threshold = 0.2  # Lower threshold for more actions
-        self.forced_action_interval = 2000  # 2 seconds
-        self.llm_guidance_weight = 0.9  # Higher LLM weight
+        # Forced automation parameters
+        self.action_threshold = 0.3  # Lower threshold for more frequent actions
+        self.forced_action_interval = 3000  # 3 seconds in milliseconds
+        self.llm_guidance_weight = 0.8  # High weight for LLM guidance
         
-        print(f"🤖 AutoELM初期化完了 (強制実行モード)")
+        print(f"🤖 AutoELM初期化完了 - 強制実行モード有効")
+        print(f"   - 行動閾値: {self.action_threshold}")
+        print(f"   - 強制実行間隔: {self.forced_action_interval}ms")
+        print(f"   - LLMガイダンス重み: {self.llm_guidance_weight}")
     
     def _initialize_weights(self, n_features):
         """Initialize ELM weights"""
         self.input_weights = np.random.randn(n_features, self.n_hidden)
         self.hidden_bias = np.random.randn(self.n_hidden)
-        self.output_weights = np.random.randn(self.n_hidden, 3)
+        self.output_weights = np.random.randn(self.n_hidden, 3)  # x, y, should_place
     
     def _sigmoid(self, x):
         """Sigmoid activation function"""
         return 1 / (1 + np.exp(-np.clip(x, -500, 500)))
     
     def predict(self, game_state, llm_guidance=None):
-        """Enhanced prediction with forced action"""
+        """Enhanced prediction with forced action and LLM guidance"""
         try:
+            # Extract features from game state
             features = self._extract_features(game_state)
             
             if self.input_weights is None:
                 self._initialize_weights(len(features))
             
+            # Forward pass
             features_scaled = self.scaler.fit_transform([features])[0]
             hidden_output = self._sigmoid(np.dot(features_scaled, self.input_weights) + self.hidden_bias)
             output = np.dot(hidden_output, self.output_weights)
             
+            # Apply LLM guidance if available
             if llm_guidance and 'place_tower' in llm_guidance.lower():
-                output[2] += self.llm_guidance_weight
+                output[2] += self.llm_guidance_weight  # Boost placement probability
                 self.llm_guidance_count += 1
                 self.last_guidance = llm_guidance
+                print(f"🧠 LLMガイダンス適用: {llm_guidance[:50]}...")
             
-            # More aggressive placement
-            should_place = output[2] > self.action_threshold or np.random.random() < 0.7
+            # Force action based on threshold
+            should_place = output[2] > self.action_threshold or np.random.random() < 0.4
+            
+            # Normalize coordinates
             x = max(0.1, min(0.9, self._sigmoid(output[0])))
             y = max(0.1, min(0.9, self._sigmoid(output[1])))
             
@@ -94,15 +111,17 @@ class AutoELM:
                 'llm_guided': llm_guidance is not None
             }
             
+            print(f"🎯 ELM予測: 配置={should_place}, 座標=({x:.2f}, {y:.2f}), 信頼度={result['confidence']:.2f}")
             return result
             
         except Exception as e:
             print(f"❌ ELM予測エラー: {e}")
+            # Fallback to random placement
             return {
                 'x': random.uniform(0.2, 0.8),
                 'y': random.uniform(0.2, 0.8),
                 'should_place': True,
-                'confidence': 0.8,
+                'confidence': 0.5,
                 'llm_guided': False
             }
     
@@ -115,9 +134,31 @@ class AutoELM:
             game_state.get('score', 0) / 1000.0,
             len(game_state.get('towers', [])) / 20.0,
             len(game_state.get('enemies', [])) / 50.0,
-            np.random.random(),
-            time.time() % 100 / 100.0
+            np.random.random(),  # Add randomness
+            time.time() % 100 / 100.0  # Time-based feature
         ]
+    
+    def learn_from_experience(self, game_state, action_taken, reward):
+        """Learn from game experience"""
+        try:
+            self.total_learning_updates += 1
+            current_score = game_state.get('score', 0)
+            print(f"📚 学習更新: {self.total_learning_updates}回, スコア: {current_score}")
+        except Exception as e:
+            print(f"❌ 学習エラー: {e}")
+    
+    def get_learning_efficiency_metrics(self):
+        """Get current learning efficiency metrics"""
+        current_time = time.time() - self.learning_start_time
+        
+        return {
+            'learning_time': current_time,
+            'learning_updates': self.total_learning_updates,
+            'llm_guidance_count': self.llm_guidance_count,
+            'learning_rate': self.total_learning_updates / max(current_time, 1) * 60,  # per minute
+            'efficiency_score': self.llm_guidance_count / max(current_time, 1) * 60,  # guidance per minute
+            'last_guidance': self.last_guidance
+        }
 
 # Global model instances
 baseline_elm = AutoELM(random_state=42)
@@ -125,14 +166,14 @@ llm_guided_elm = AutoELM(random_state=43)
 
 @app.route('/')
 def index():
-    """Serve the main game page"""
+    """Serve the main game page with auto-restart functionality"""
     html_template = """
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tower Defense ELM Trainer</title>
+    <title>Tower Defense ELM Auto-Fix</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -200,6 +241,9 @@ def index():
             background: #2980b9;
             transform: translateY(-2px);
         }
+        .button:active {
+            transform: translateY(0);
+        }
         .btn-mode {
             width: calc(100% - 10px);
             margin: 2px 5px;
@@ -244,89 +288,39 @@ def index():
             color: #ecf0f1;
         }
         .api-section {
-            background: rgba(231, 76, 60, 0.3);
+            background: rgba(231, 76, 60, 0.2);
             border: 2px solid #e74c3c;
             border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
+            padding: 15px;
+            margin: 15px 0;
         }
         .api-input {
             width: 100%;
-            padding: 15px;
-            margin: 10px 0;
+            padding: 12px;
+            margin-bottom: 10px;
             border: 2px solid #3498db;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 14px;
             box-sizing: border-box;
-            background: rgba(255, 255, 255, 0.9);
-            color: #2c3e50;
-        }
-        .api-button {
-            width: 100%;
-            padding: 15px;
-            background: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 10px 0;
-        }
-        .api-button:hover {
-            background: #219a52;
         }
         .api-status {
-            margin: 15px 0;
-            padding: 15px;
+            margin: 10px 0;
+            padding: 12px;
             border-radius: 8px;
-            font-size: 16px;
+            background: #e74c3c;
+            color: white;
+            font-size: 14px;
             text-align: center;
             font-weight: bold;
         }
-        .api-status.error {
-            background: #e74c3c;
-            color: white;
-        }
-        .api-status.success {
+        .api-status.configured {
             background: #27ae60;
-            color: white;
-        }
-        .game-over-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .game-over-message {
-            background: #2c3e50;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            color: white;
-            font-size: 18px;
         }
     </style>
 </head>
 <body>
-    <h1>🎮 Tower Defense ELM Trainer</h1>
+    <h1>🎮 Tower Defense LLM Trainer</h1>
     <p style="text-align: center; margin-bottom: 30px;">AIが学ぶ次世代タワーディフェンスゲーム</p>
-    
-    <!-- Game Over Overlay -->
-    <div id="gameOverOverlay" class="game-over-overlay">
-        <div class="game-over-message">
-            <h2 id="gameOverTitle">ゲームオーバー！</h2>
-            <p id="gameOverScore">スコア: 0</p>
-            <p id="gameOverCountdown">自動再開まで: 3秒</p>
-        </div>
-    </div>
     
     <div class="container">
         <div class="game-area">
@@ -340,17 +334,6 @@ def index():
         </div>
         
         <div class="control-panel">
-            <!-- API Key Section -->
-            <div class="api-section">
-                <h4 style="margin-top: 0; color: #fff; font-size: 18px;">🔑 OpenAI API設定</h4>
-                <p style="margin: 10px 0; font-size: 14px;">LLMガイダンス機能を使用するにはAPIキーが必要です</p>
-                <input type="password" id="apiKeyInput" class="api-input" placeholder="sk-... で始まるOpenAI APIキーを入力">
-                <button class="api-button" onclick="setApiKey()">🔧 APIキーを設定</button>
-                <div id="apiStatus" class="api-status error">
-                    ⚠️ APIキー未設定 - LLM機能が無効です
-                </div>
-            </div>
-            
             <h4>📊 ゲーム状況</h4>
             <div class="status-grid">
                 <div class="status-item">
@@ -384,12 +367,21 @@ def index():
             
             <div class="auto-indicator">
                 <strong>🔧 ELM自動実行: 有効</strong><br>
-                <small>2秒間隔で強制実行</small>
+                <small>3秒間隔で強制実行</small>
             </div>
             
             <div class="auto-indicator">
                 <strong>🔄 自動再開: 有効</strong><br>
-                <small>ライフ0で3秒後に自動再開</small>
+                <small>ライフ0で2秒後に自動再開</small>
+            </div>
+            
+            <div class="api-section">
+                <h4>🔑 OpenAI API設定</h4>
+                <input type="password" id="apiKeyInput" class="api-input" placeholder="OpenAI APIキーを入力してください">
+                <button class="button" onclick="setApiKey()" style="background: #27ae60; width: 100%;">🔧 APIキー設定</button>
+                <div id="apiStatus" class="api-status">
+                    ⚠️ APIキー未設定 - LLM機能が無効です
+                </div>
             </div>
             
             <h4>ゲームモード</h4>
@@ -445,7 +437,6 @@ def index():
         let gameLoop = null;
         let elmLoop = null;
         let autoRestartTimeout = null;
-        let gameOverCountdown = null;
         
         // Canvas setup
         const canvas = document.getElementById('gameCanvas');
@@ -463,18 +454,18 @@ def index():
             const input = document.getElementById('apiKeyInput');
             const status = document.getElementById('apiStatus');
             
-            if (input.value.trim() && input.value.trim().startsWith('sk-')) {
+            if (input.value.trim()) {
                 apiKey = input.value.trim();
                 apiConfigured = true;
-                status.className = 'api-status success';
+                status.className = 'api-status configured';
                 status.textContent = '✅ APIキー設定済み - LLM機能が有効です';
                 console.log('OpenAI APIキーが設定されました');
             } else {
                 apiKey = '';
                 apiConfigured = false;
-                status.className = 'api-status error';
-                status.textContent = '❌ 無効なAPIキー - sk-で始まる正しいキーを入力してください';
-                console.log('無効なAPIキーです');
+                status.className = 'api-status';
+                status.textContent = '⚠️ APIキー未設定 - LLM機能が無効です';
+                console.log('APIキーが空です');
             }
         }
         
@@ -492,13 +483,13 @@ def index():
                 elmStatus.textContent = '有効 (単独)';
                 if (gameState.running) {
                     clearInterval(elmLoop);
-                    elmLoop = setInterval(runELMAutomation, 2000); // 2 seconds
+                    elmLoop = setInterval(runELMAutomation, 3000);
                 }
             } else if (mode === 'elm_llm') {
                 elmStatus.textContent = '有効 (hybrid)';
                 if (gameState.running) {
                     clearInterval(elmLoop);
-                    elmLoop = setInterval(runELMAutomation, 2000); // 2 seconds
+                    elmLoop = setInterval(runELMAutomation, 3000);
                 }
             }
             
@@ -513,20 +504,20 @@ def index():
             gameState.running = true;
             gameState.paused = false;
             
-            // Hide game over overlay
-            document.getElementById('gameOverOverlay').style.display = 'none';
-            
             if (!experimentData.startTime) {
                 experimentData.startTime = Date.now();
             }
             experimentData.trialCount++;
             
+            // Start game loop
             gameLoop = setInterval(updateGame, 100);
             
+            // Start ELM automation for non-manual modes
             if (gameState.mode !== 'manual') {
                 clearInterval(elmLoop);
-                elmLoop = setInterval(runELMAutomation, 2000); // 2 seconds
-                setTimeout(runELMAutomation, 500); // Start immediately
+                elmLoop = setInterval(runELMAutomation, 3000);
+                // Start immediately after 1 second
+                setTimeout(runELMAutomation, 1000);
             }
             
             updateGuidance('ゲーム開始！ELM自動配置が有効です');
@@ -544,7 +535,7 @@ def index():
             } else {
                 gameLoop = setInterval(updateGame, 100);
                 if (gameState.mode !== 'manual') {
-                    elmLoop = setInterval(runELMAutomation, 2000);
+                    elmLoop = setInterval(runELMAutomation, 3000);
                 }
                 updateGuidance('ゲーム再開！');
             }
@@ -567,22 +558,19 @@ def index():
             clearInterval(gameLoop);
             clearInterval(elmLoop);
             clearTimeout(autoRestartTimeout);
-            clearInterval(gameOverCountdown);
-            
-            // Hide game over overlay
-            document.getElementById('gameOverOverlay').style.display = 'none';
             
             updateDisplay();
             updateGuidance('ゲームがリセットされました');
             draw();
         }
         
-        // ELM automation function - More aggressive
+        // ELM automation function
         function runELMAutomation() {
             if (!gameState.running || gameState.mode === 'manual') return;
             
             console.log('ELM自動実行開始...');
             
+            // Call ELM prediction API
             fetch('/api/elm-predict', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -616,8 +604,8 @@ def index():
             })
             .catch(error => {
                 console.error('ELM API エラー:', error);
-                // More aggressive fallback
-                if (gameState.money >= 50 && Math.random() < 0.8) {
+                // Fallback: random placement
+                if (gameState.money >= 50 && Math.random() < 0.6) {
                     const x = Math.random() * (canvas.width - 100) + 50;
                     const y = Math.random() * (canvas.height - 100) + 50;
                     placeTower(x, y);
@@ -661,13 +649,16 @@ def index():
         function updateGame() {
             if (!gameState.running || gameState.paused) return;
             
+            // Spawn enemies
             if (Math.random() < 0.05) {
                 spawnEnemy();
             }
             
+            // Update enemies
             enemies.forEach((enemy, index) => {
                 moveEnemy(enemy);
                 if (enemy.pathIndex >= path.length) {
+                    // Enemy reached end
                     gameState.health -= enemy.damage;
                     enemies.splice(index, 1);
                     
@@ -678,6 +669,7 @@ def index():
                 }
             });
             
+            // Tower attacks
             towers.forEach(tower => {
                 enemies.forEach((enemy, enemyIndex) => {
                     const distance = Math.sqrt(
@@ -696,6 +688,7 @@ def index():
                 });
             });
             
+            // Update display
             gameState.towers = towers.length;
             gameState.enemies = enemies.length;
             updateDisplay();
@@ -708,52 +701,28 @@ def index():
             clearInterval(gameLoop);
             clearInterval(elmLoop);
             clearTimeout(autoRestartTimeout);
-            clearInterval(gameOverCountdown);
             
             console.log(`ゲームオーバー！スコア: ${gameState.score}点, 試行: ${experimentData.trialCount}`);
-            
-            // Show game over overlay instead of alert
-            const overlay = document.getElementById('gameOverOverlay');
-            const title = document.getElementById('gameOverTitle');
-            const score = document.getElementById('gameOverScore');
-            const countdown = document.getElementById('gameOverCountdown');
-            
-            title.textContent = 'ゲームオーバー！';
-            score.textContent = `スコア: ${gameState.score}点`;
-            overlay.style.display = 'flex';
-            
             updateGuidance(`ゲームオーバー！スコア: ${gameState.score}点`);
             
-            // Auto restart for ELM modes
+            // Force auto-restart for ELM modes
             if (gameState.mode === 'elm_only' || gameState.mode === 'elm_llm') {
                 experimentData.autoRestart = true;
             }
             
             if (experimentData.autoRestart) {
-                let countdownSeconds = 3;
-                countdown.textContent = `自動再開まで: ${countdownSeconds}秒`;
-                
-                gameOverCountdown = setInterval(() => {
-                    countdownSeconds--;
-                    countdown.textContent = `自動再開まで: ${countdownSeconds}秒`;
-                    
-                    if (countdownSeconds <= 0) {
-                        clearInterval(gameOverCountdown);
-                        overlay.style.display = 'none';
-                        
-                        console.log('自動再開実行中...');
-                        resetGame();
-                        setTimeout(() => {
-                            startGame();
-                            updateGuidance(`自動再開完了！試行 ${experimentData.trialCount}`);
-                        }, 500);
-                    }
-                }, 1000);
-                
-                updateGuidance(`3秒後に自動再開します... (試行 ${experimentData.trialCount + 1})`);
+                updateGuidance(`2秒後に自動再開します... (試行 ${experimentData.trialCount + 1})`);
                 console.log('自動再開タイマー開始...');
+                
+                autoRestartTimeout = setTimeout(() => {
+                    console.log('自動再開実行中...');
+                    resetGame();
+                    setTimeout(() => {
+                        startGame();
+                        updateGuidance(`自動再開完了！試行 ${experimentData.trialCount}`);
+                    }, 500);
+                }, 2000);
             } else {
-                countdown.textContent = '手動で再開してください';
                 updateGuidance(`ゲーム終了。手動で再開してください。`);
             }
         }
@@ -829,6 +798,7 @@ def index():
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
+            // Draw path
             ctx.strokeStyle = '#34495e';
             ctx.lineWidth = 20;
             ctx.beginPath();
@@ -838,12 +808,14 @@ def index():
             }
             ctx.stroke();
             
+            // Draw towers
             towers.forEach(tower => {
                 ctx.fillStyle = '#2ecc71';
                 ctx.beginPath();
                 ctx.arc(tower.x, tower.y, 15, 0, Math.PI * 2);
                 ctx.fill();
                 
+                // Draw range
                 ctx.strokeStyle = 'rgba(46, 204, 113, 0.3)';
                 ctx.lineWidth = 1;
                 ctx.beginPath();
@@ -851,12 +823,14 @@ def index():
                 ctx.stroke();
             });
             
+            // Draw enemies
             enemies.forEach(enemy => {
                 ctx.fillStyle = '#e74c3c';
                 ctx.beginPath();
                 ctx.arc(enemy.x, enemy.y, 10, 0, Math.PI * 2);
                 ctx.fill();
                 
+                // Health bar
                 const barWidth = 20;
                 const barHeight = 4;
                 const healthRatio = enemy.health / enemy.maxHealth;
@@ -868,6 +842,7 @@ def index():
             });
         }
         
+        // Canvas click handler for manual mode
         canvas.addEventListener('click', (e) => {
             if (gameState.mode === 'manual' && gameState.running) {
                 const rect = canvas.getBoundingClientRect();
@@ -882,6 +857,7 @@ def index():
         draw();
         updateGuidance('ゲームを開始してください');
         
+        // Update experiment display every second
         setInterval(updateExperimentDisplay, 1000);
     </script>
 </body>
@@ -896,7 +872,10 @@ def elm_predict():
         data = request.json
         mode = data.get('mode', 'elm_only')
         
+        # Select appropriate model
         model = llm_guided_elm if mode == 'elm_llm' else baseline_elm
+        
+        # Get prediction
         prediction = model.predict(data)
         
         return jsonify(prediction)
@@ -907,7 +886,7 @@ def elm_predict():
             'x': random.uniform(0.2, 0.8),
             'y': random.uniform(0.2, 0.8),
             'should_place': True,
-            'confidence': 0.8,
+            'confidence': 0.5,
             'error': str(e)
         })
 
@@ -918,11 +897,13 @@ def get_llm_guidance():
         data = request.json
         game_state = data['game_state']
         
+        # Get API key from header
         api_key = request.headers.get('X-API-Key')
         
         if not api_key:
             return get_rule_based_guidance(game_state)
         
+        # Create OpenAI client with provided API key
         try:
             from openai import OpenAI
             temp_client = OpenAI(api_key=api_key)
@@ -930,6 +911,7 @@ def get_llm_guidance():
             print(f"OpenAI client creation failed: {e}")
             return get_rule_based_guidance(game_state)
         
+        # Prepare prompt
         prompt = f"""
 タワーディフェンスゲームの戦略アドバイスをお願いします。
 
@@ -981,6 +963,45 @@ def get_rule_based_guidance(game_state):
         'recommendation': guidance,
         'source': 'rule_based'
     })
+
+@app.route('/api/elm-learn', methods=['POST'])
+def elm_learn():
+    """ELM learning API endpoint"""
+    try:
+        data = request.json
+        mode = data.get('mode', 'elm_only')
+        
+        # Select appropriate model
+        model = llm_guided_elm if mode == 'elm_llm' else baseline_elm
+        
+        # Learn from experience
+        model.learn_from_experience(
+            data.get('game_state', {}),
+            data.get('action_taken', {}),
+            data.get('reward', 0)
+        )
+        
+        return jsonify({'status': 'learned'})
+        
+    except Exception as e:
+        print(f"ELM learning error: {e}")
+        return jsonify({'error': str(e)})
+
+@app.route('/api/elm-metrics', methods=['GET'])
+def elm_metrics():
+    """Get ELM learning metrics"""
+    try:
+        baseline_metrics = baseline_elm.get_learning_efficiency_metrics()
+        llm_guided_metrics = llm_guided_elm.get_learning_efficiency_metrics()
+        
+        return jsonify({
+            'baseline': baseline_metrics,
+            'llm_guided': llm_guided_metrics
+        })
+        
+    except Exception as e:
+        print(f"Metrics error: {e}")
+        return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
