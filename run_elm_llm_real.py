@@ -15,19 +15,24 @@ from src.llm_teacher import LLMTeacher
 class ELMLLMHybridAgentReal(ELMTowerDefenseAgent):
     """実測専用ELM+LLMハイブリッドエージェント"""
     
-    def __init__(self, input_size, hidden_size, output_size, 
-                 llm_teacher, run_logger=None, llm_logger=None):
+    def __init__(self, input_size, hidden_size, output_size, llm_teacher, run_logger=None, llm_logger=None):
         super().__init__(input_size, hidden_size, output_size)
         self.llm_teacher = llm_teacher
         self.run_logger = run_logger
         self.llm_logger = llm_logger
         self.llm_call_count = 0
         self.llm_adoption_count = 0
+        # 呼び出し間引き：30ステップに1回（コスト・レート制限対策）
+        self.eval_interval_steps = 30
     
     def predict_with_guidance(self, state, env, episode, step):
         """LLMガイダンス付きの予測（実測のみ）"""
         # ELMの基本行動
         base_action = self.select_action(state)
+        
+        # 呼び出し間引き：30ステップに1回のみLLMを呼び出し
+        if step % self.eval_interval_steps != 0:
+            return base_action, False, None
         
         # LLM教師の評価・推奨
         try:

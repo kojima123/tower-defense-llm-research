@@ -1,9 +1,0 @@
-{
-  "condition": "elm_only",
-  "seed": 42,
-  "episodes": 2,
-  "env_version": "1.0",
-  "agent_version": "1.0",
-  "prompt_version": "N/A",
-  "model_name": "gpt-4o-mini"
-}

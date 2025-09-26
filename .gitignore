@@ -51,12 +51,15 @@ logs/
 *.tmp
 *.temp
 
-# Node modules (if any)
+# Node
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.npm
+
+# Experiment logs and results (keep local, exclude from repo)
+runs/
+*.log
 .yarn-integrity
 
 # API keys (security)
