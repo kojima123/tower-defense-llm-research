@@ -1,5 +1,5 @@
 {
-  "validation_timestamp": "2025-09-26T03:40:28.520969",
+  "validation_timestamp": "2025-09-26T04:21:48.144318",
   "synthetic_data_validation": {
     "is_valid": true,
     "violations": [],
@@ -10,10 +10,10 @@
     "total_episodes": 32,
     "total_steps": 51974,
     "conditions": [
-      "elm_only",
       "elm_llm",
+      "rule_teacher",
       "random_teacher",
-      "rule_teacher"
+      "elm_only"
     ],
     "seeds_used": [
       456,
