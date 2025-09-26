@@ -23,7 +23,7 @@ ENEMY_REWARD = 30
 ATTACK_INTERVAL = 500
 
 # OpenAI configuration
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "YOUR_OPENAI_API_KEY_HERE"
 
 def get_real_llm_guidance(game_state):
     """Get real LLM guidance from OpenAI GPT-4o-mini"""

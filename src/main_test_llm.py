@@ -18,7 +18,7 @@ app = Flask(__name__, static_folder='../static', static_url_path='')
 CORS(app)
 
 # Test API key (for demonstration purposes)
-TEST_OPENAI_API_KEY = "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"
+TEST_OPENAI_API_KEY = "YOUR_OPENAI_API_KEY_HERE"
 
 # Get the absolute path to the project directory
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
