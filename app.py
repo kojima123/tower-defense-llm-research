@@ -386,6 +386,14 @@ def index():
                 <small>ライフ0で2秒後に自動再開</small>
             </div>
             
+            <h4>🔑 OpenAI API設定</h4>
+            <input type="password" id="apiKeyInput" placeholder="OpenAI APIキーを入力" 
+                   style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            <button class="button" onclick="setApiKey()" style="background: #27ae60;">🔧 APIキー設定</button>
+            <div id="apiStatus" style="margin: 10px 0; padding: 8px; border-radius: 4px; background: #e74c3c; color: white; font-size: 12px;">
+                APIキー未設定
+            </div>
+            
             <h4>ゲームモード</h4>
             <button class="button btn-mode" onclick="setMode('manual')">🎮 手動プレイ</button>
             <button class="button btn-mode" onclick="setMode('elm_only')">🤖 ELMのみ</button>
@@ -426,6 +434,9 @@ def index():
             guidanceCount: 0,
             autoRestart: true
         };
+        
+        let apiKey = '';
+        let apiConfigured = false;
         
         // Canvas setup
         const canvas = document.getElementById('gameCanvas');
@@ -515,6 +526,25 @@ def index():
             updateDisplay();
             drawGame();
             updateGuidance("ゲームがリセットされました。");
+        }
+        
+        function setApiKey() {
+            const input = document.getElementById('apiKeyInput');
+            const status = document.getElementById('apiStatus');
+            
+            if (input.value.trim()) {
+                apiKey = input.value.trim();
+                apiConfigured = true;
+                status.style.background = '#27ae60';
+                status.textContent = 'APIキー設定済み ✓';
+                console.log('OpenAI APIキーが設定されました');
+            } else {
+                apiKey = '';
+                apiConfigured = false;
+                status.style.background = '#e74c3c';
+                status.textContent = 'APIキー未設定';
+                console.log('APIキーが空です');
+            }
         }
         
         function setMode(mode) {
@@ -712,9 +742,17 @@ def index():
         function getLLMGuidance() {
             if (gameState.mode !== 'elm_llm') return;
             
+            if (!apiConfigured) {
+                updateGuidance("APIキーを設定してください");
+                return;
+            }
+            
             fetch('/api/llm-guidance', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-Key': apiKey
+                },
                 body: JSON.stringify({game_state: gameState})
             })
             .then(response => response.json())
@@ -727,7 +765,7 @@ def index():
             })
             .catch(error => {
                 console.error('LLM guidance error:', error);
-                updateGuidance("タワーを配置してください");
+                updateGuidance("LLMガイダンスエラー - APIキーを確認してください");
             });
         }
         
@@ -825,7 +863,18 @@ def get_llm_guidance():
         data = request.json
         game_state = data['game_state']
         
-        if not client:
+        # Get API key from header
+        api_key = request.headers.get('X-API-Key')
+        
+        if not api_key:
+            return get_rule_based_guidance(game_state)
+        
+        # Create OpenAI client with provided API key
+        try:
+            from openai import OpenAI
+            temp_client = OpenAI(api_key=api_key)
+        except Exception as e:
+            print(f"OpenAI client creation failed: {e}")
             return get_rule_based_guidance(game_state)
         
         try:
@@ -845,7 +894,7 @@ def get_llm_guidance():
 具体的で実行可能なアドバイスを1文で回答してください。
 """
             
-            response = client.chat.completions.create(
+            response = temp_client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=100,
