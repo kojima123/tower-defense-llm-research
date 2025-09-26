@@ -469,10 +469,12 @@ def index():
             if (gameLoop) clearInterval(gameLoop);
             gameLoop = setInterval(updateGame, 100);
             
-            // Start ELM automation (5 second intervals)
+            // Start ELM automation (3 second intervals for faster placement)
             if (elmLoop) clearInterval(elmLoop);
             if (gameState.mode !== 'manual') {
-                elmLoop = setInterval(runELMAutomation, 5000);
+                elmLoop = setInterval(runELMAutomation, 3000);
+                // Also run immediately
+                setTimeout(runELMAutomation, 1000);
             }
             
             // Start enemy spawning
@@ -489,7 +491,7 @@ def index():
             } else {
                 gameLoop = setInterval(updateGame, 100);
                 if (gameState.mode !== 'manual') {
-                    elmLoop = setInterval(runELMAutomation, 5000);
+                    elmLoop = setInterval(runELMAutomation, 3000);
                 }
             }
         }
@@ -523,7 +525,7 @@ def index():
             if (gameState.running) {
                 clearInterval(elmLoop);
                 if (mode !== 'manual') {
-                    elmLoop = setInterval(runELMAutomation, 5000);
+                    elmLoop = setInterval(runELMAutomation, 3000);
                 }
             }
         }
@@ -531,20 +533,50 @@ def index():
         function runELMAutomation() {
             if (!gameState.running || gameState.mode === 'manual') return;
             
-            // Force ELM to make a decision
-            if (gameState.money >= 50) {
-                // Simple strategy: place tower if we have money
-                const x = Math.random() * (canvas.width - 100) + 50;
-                const y = Math.random() * (canvas.height - 100) + 50;
+            console.log('ELM自動実行開始...');
+            
+            // Call ELM prediction API
+            fetch('/api/elm-predict', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    mode: gameState.mode,
+                    money: gameState.money,
+                    health: gameState.health,
+                    wave: gameState.wave,
+                    score: gameState.score,
+                    towers: gameState.towers,
+                    enemies: gameState.enemies
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('ELM予測結果:', data);
                 
-                placeTower(x, y);
-                
-                if (gameState.mode === 'elm_llm') {
-                    getLLMGuidance();
+                if (data.should_place && gameState.money >= 50) {
+                    const x = Math.max(50, Math.min(canvas.width - 50, data.x * canvas.width));
+                    const y = Math.max(50, Math.min(canvas.height - 50, data.y * canvas.height));
+                    
+                    placeTower(x, y);
+                    console.log(`ELM自動配置: タワーを(${x.toFixed(0)}, ${y.toFixed(0)})に配置`);
+                    
+                    if (gameState.mode === 'elm_llm') {
+                        getLLMGuidance();
+                    }
+                } else {
+                    console.log('ELM判断: タワー配置なし');
                 }
-                
-                console.log(`ELM自動動作: タワーを(${x.toFixed(0)}, ${y.toFixed(0)})に配置`);
-            }
+            })
+            .catch(error => {
+                console.error('ELM API エラー:', error);
+                // Fallback: Force placement if we have money
+                if (gameState.money >= 50) {
+                    const x = Math.random() * (canvas.width - 100) + 50;
+                    const y = Math.random() * (canvas.height - 100) + 50;
+                    placeTower(x, y);
+                    console.log(`ELM フォールバック: タワーを(${x.toFixed(0)}, ${y.toFixed(0)})に配置`);
+                }
+            });
         }
         
         function spawnEnemies() {
@@ -653,14 +685,27 @@ def index():
             gameState.running = false;
             clearInterval(gameLoop);
             clearInterval(elmLoop);
+            clearTimeout(autoRestartTimeout);
             
+            console.log(`ゲームオーバー！スコア: ${gameState.score}点, 試行: ${experimentData.trialCount}`);
             updateGuidance(`ゲームオーバー！スコア: ${gameState.score}点`);
+            
+            // Force auto-restart for ELM modes
+            if (gameState.mode === 'elm_only' || gameState.mode === 'elm_llm') {
+                experimentData.autoRestart = true;
+            }
             
             if (experimentData.autoRestart) {
                 updateGuidance(`2秒後に自動再開します... (試行 ${experimentData.trialCount + 1})`);
+                console.log('自動再開タイマー開始...');
+                
                 autoRestartTimeout = setTimeout(() => {
+                    console.log('自動再開実行中...');
                     startGame();
+                    updateGuidance(`自動再開完了！試行 ${experimentData.trialCount}`);
                 }, 2000);
+            } else {
+                updateGuidance(`ゲーム終了。手動で再開してください。`);
             }
         }
         
