@@ -42,6 +42,8 @@ install:
 validate:
 	@echo "🔬 Validating data quality (synthetic data detection)..."
 	$(PYTHON) validate_real_data.py
+	@echo "🔍 Running integrated validation..."
+	@$(PYTHON) -c "from logger import validate_experiment_integrity; import json; result = validate_experiment_integrity('.'); print('✅ VALIDATION PASSED' if result['validation_passed'] else '❌ VALIDATION FAILED'); print(f'Data quality score: {result[\"data_quality_score\"]}/100')"
 
 # ELM単体実験
 run-elm:

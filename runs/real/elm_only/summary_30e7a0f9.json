@@ -1,0 +1,23 @@
+{
+  "condition": "elm_only",
+  "episodes": 2,
+  "seed": 42,
+  "total_time": 1.7539918422698975,
+  "episode_scores": [
+    1900,
+    1900
+  ],
+  "mean_score": 1900.0,
+  "final_score": 1900,
+  "max_score": 1900,
+  "min_score": 1900,
+  "learning_success_rate": 1.0,
+  "agent_parameters": {
+    "input_size": 55,
+    "hidden_size": 100,
+    "output_size": 115,
+    "training_samples": 1000
+  },
+  "config_hash": "30e7a0f9",
+  "timestamp": 1758876761.1775959
+}

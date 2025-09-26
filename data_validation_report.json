@@ -1,19 +1,19 @@
 {
-  "validation_timestamp": "2025-09-26T04:21:48.144318",
+  "validation_timestamp": "2025-09-26T04:52:55.606771",
   "synthetic_data_validation": {
     "is_valid": true,
     "violations": [],
     "total_violations": 0
   },
   "real_data_statistics": {
-    "total_experiments": 8,
-    "total_episodes": 32,
-    "total_steps": 51974,
+    "total_experiments": 10,
+    "total_episodes": 36,
+    "total_steps": 55974,
     "conditions": [
-      "elm_llm",
-      "rule_teacher",
+      "elm_only",
       "random_teacher",
-      "elm_only"
+      "elm_llm",
+      "rule_teacher"
     ],
     "seeds_used": [
       456,

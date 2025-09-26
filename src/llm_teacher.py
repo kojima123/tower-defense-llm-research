@@ -59,8 +59,7 @@ class LLMTeacher:
                     "model": self.model,
                     "messages": [{"role": "user", "content": prompt}],
                     "temperature": 0.3,
-                    "max_tokens": 150,
-                    "timeout": 10
+                    "max_tokens": 150
                 },
                 timeout=15
             )

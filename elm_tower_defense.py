@@ -167,7 +167,7 @@ class TowerDefenseEnvironment:
         self.wave_timer += 1
         
         # 新しいウェーブの生成
-        if len(self.enemies) == 0 and self.wave_timer > 180:  # 3秒間隔
+        if len(self.enemies) == 0 and self.wave_timer > 180:  # 180ステップ後
             self._spawn_wave()
             self.wave_timer = 0
         

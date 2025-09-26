@@ -11,19 +11,19 @@ class ELMTowerDefenseAgent:
     """ELM（Extreme Learning Machine）を使用したタワーディフェンスエージェント"""
     
     def __init__(self, input_size: int, hidden_size: int, output_size: int, seed: Optional[int] = None):
-        if seed is not None:
-            np.random.seed(seed)
-        
         self.input_size = input_size
         self.hidden_size = hidden_size
         self.output_size = output_size
         
+        # 個別RNG生成器（グローバルシードに依存しない）
+        self.rng = np.random.default_rng(seed)
+        
         # ELMの重み（入力層→隠れ層）
-        self.input_weights = np.random.randn(input_size, hidden_size) * 0.5
-        self.biases = np.random.randn(hidden_size) * 0.5
+        self.input_weights = self.rng.normal(0, 0.5, (input_size, hidden_size))
+        self.biases = self.rng.normal(0, 0.5, hidden_size)
         
         # 出力重み（隠れ層→出力層）- 学習で更新される
-        self.output_weights = np.random.randn(hidden_size, output_size) * 0.1
+        self.output_weights = self.rng.normal(0, 0.1, (hidden_size, output_size))
         
         # 学習用データ蓄積
         self.training_data = []
@@ -56,9 +56,9 @@ class ELMTowerDefenseAgent:
         """ε-greedy行動選択"""
         self.total_actions += 1
         
-        if np.random.random() < epsilon:
+        if self.rng.random() < epsilon:
             # ランダム行動
-            return np.random.randint(0, self.output_size)
+            return self.rng.integers(0, self.output_size)
         else:
             # 最適行動
             q_values = self.predict(state)
@@ -242,8 +242,8 @@ class RandomTeacher:
     
     def __init__(self, seed: Optional[int] = None):
         self.name = "random_teacher"
-        if seed is not None:
-            np.random.seed(seed)
+        # 個別RNG生成器（グローバルシードに依存しない）
+        self.rng = np.random.default_rng(seed)
     
     def get_action(self, env) -> int:
         """ランダムな行動決定"""
@@ -254,7 +254,7 @@ class RandomTeacher:
             return len(env.valid_positions)
         
         # 70%の確率でタワー配置、30%で待機
-        if np.random.random() < 0.7:
+        if self.rng.random() < 0.7:
             # 利用可能な位置からランダム選択
             available_positions = []
             for i, pos in enumerate(env.valid_positions):
@@ -264,6 +264,6 @@ class RandomTeacher:
                     available_positions.append(i)
             
             if available_positions:
-                return np.random.choice(available_positions)
+                return self.rng.choice(available_positions)
         
         return len(env.valid_positions)  # 何もしない

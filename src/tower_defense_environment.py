@@ -84,8 +84,11 @@ class TowerDefenseEnvironment:
     
     def reset(self, seed: Optional[int] = None):
         """環境をリセット"""
+        # 個別RNG生成器（グローバルシードに依存しない）
         if seed is not None:
-            np.random.seed(seed)
+            self.rng = np.random.default_rng(seed)
+        else:
+            self.rng = np.random.default_rng()
         
         self.money = self.INITIAL_MONEY
         self.health = self.INITIAL_HEALTH
