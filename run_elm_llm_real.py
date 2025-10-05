@@ -38,7 +38,14 @@ class ELMLLMHybridAgentReal(ELMTowerDefenseAgent):
         try:
             evaluation = self.llm_teacher.evaluate_state_and_recommend(env)
             self.llm_call_count += 1
-            
+
+            # ガイダンスの適用
+            final_action = self._apply_guidance(base_action, evaluation, env)
+            adopted = bool(final_action != base_action)
+
+            if adopted:
+                self.llm_adoption_count += 1
+
             # LLM介入ログ
             if self.llm_logger:
                 prompt = self.llm_teacher.get_last_prompt()
@@ -48,17 +55,11 @@ class ELMLLMHybridAgentReal(ELMTowerDefenseAgent):
                     prompt=prompt,
                     response=evaluation,
                     decision=evaluation,
-                    adopted=True
+                    adopted=adopted
                 )
-            
-            # ガイダンスの適用
-            final_action = self._apply_guidance(base_action, evaluation, env)
-            
-            if final_action != base_action:
-                self.llm_adoption_count += 1
-            
+
             return final_action, True, evaluation
-            
+
         except Exception as e:
             print(f"LLM call failed: {e}")
             # LLM失敗時はELMの行動をそのまま使用
