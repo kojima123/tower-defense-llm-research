@@ -134,10 +134,37 @@ class LLMGuidedTowerDefenseELM:
         if learning_rate is None:
             learning_rate = self.learning_rate
         
-        # Enhanced learning with LLM guidance consideration
-        prediction = self.predict(x, self.last_guidance)
+        # Normalize inputs (same as predict)
+        x_norm = []
+        for val in x:
+            if abs(val) > 1e-8:
+                x_norm.append(val / abs(val))
+            else:
+                x_norm.append(val)
+
+        # Forward pass to capture hidden activations
+        hidden = []
+        for j in range(len(self.hidden_bias)):
+            sum_val = self.hidden_bias[j]
+            for i in range(len(x_norm)):
+                sum_val += x_norm[i] * self.input_weights[i][j]
+            hidden.append(self.tanh(sum_val))
+
+        # Output layer computation
+        output = []
+        for j in range(len(self.output_weights[0])):
+            sum_val = 0
+            for i in range(len(hidden)):
+                sum_val += hidden[i] * self.output_weights[i][j]
+            output.append(sum_val)
+
+        # Apply activations
+        output[0] = self.sigmoid(output[0])
+        output[1] = self.sigmoid(output[1])
+
+        prediction = output[:]
         error = [target[i] - prediction[i] for i in range(len(target))]
-        
+
         # Adjust learning rate based on LLM guidance confidence
         if self.last_guidance:
             priority = self.last_guidance.get('priority', 'medium')
@@ -145,11 +172,25 @@ class LLMGuidedTowerDefenseELM:
                 learning_rate *= 1.5  # Learn faster for urgent situations
             elif priority == 'high':
                 learning_rate *= 1.2
-        
-        # Update output weights
+
+            guidance_influence = self._interpret_llm_guidance(self.last_guidance)
+            prediction[0] = prediction[0] * (1 - self.llm_guidance_weight) + guidance_influence['should_place'] * self.llm_guidance_weight
+            prediction[1] = prediction[1] * (1 - self.llm_guidance_weight) + guidance_influence['urgency'] * self.llm_guidance_weight
+            error = [target[i] - prediction[i] for i in range(len(target))]
+
+        # Update output weights with hidden layer contribution
+        total_change = 0.0
         for i in range(len(self.output_weights)):
             for j in range(len(self.output_weights[i])):
-                self.output_weights[i][j] += learning_rate * error[j] * 0.1
+                delta = learning_rate * error[j] * hidden[i]
+                if not math.isfinite(delta):
+                    continue
+                before = self.output_weights[i][j]
+                self.output_weights[i][j] = before + delta
+                total_change += abs(delta)
+
+        if total_change > 0:
+            print(f"[LLMGuidedTowerDefenseELM] Output weights updated (total change: {total_change:.6f})")
 
 # Simple ELM implementation without LLM guidance
 class SimpleTowerDefenseELM:
@@ -225,14 +266,50 @@ class SimpleTowerDefenseELM:
         if learning_rate is None:
             learning_rate = self.learning_rate
         
-        # Simple weight update
-        prediction = self.predict(x)
+        # Normalize inputs (same as predict)
+        x_norm = []
+        for val in x:
+            if abs(val) > 1e-8:
+                x_norm.append(val / abs(val))
+            else:
+                x_norm.append(val)
+
+        # Forward pass to capture hidden activations
+        hidden = []
+        for j in range(len(self.hidden_bias)):
+            sum_val = self.hidden_bias[j]
+            for i in range(len(x_norm)):
+                sum_val += x_norm[i] * self.input_weights[i][j]
+            hidden.append(self.tanh(sum_val))
+
+        # Output layer computation
+        output = []
+        for j in range(len(self.output_weights[0])):
+            sum_val = 0
+            for i in range(len(hidden)):
+                sum_val += hidden[i] * self.output_weights[i][j]
+            output.append(sum_val)
+
+        # Apply activations
+        output[0] = self.sigmoid(output[0])
+        output[1] = self.sigmoid(output[1])
+
+        prediction = output
         error = [target[i] - prediction[i] for i in range(len(target))]
-        
-        # Update output weights
+
+        # Update output weights with hidden layer contribution
+        total_change = 0.0
         for i in range(len(self.output_weights)):
             for j in range(len(self.output_weights[i])):
-                self.output_weights[i][j] += learning_rate * error[j] * 0.1
+                delta = learning_rate * error[j] * hidden[i]
+                if not math.isfinite(delta):
+                    continue
+                before = self.output_weights[i][j]
+                self.output_weights[i][j] = before + delta
+                total_change += abs(delta)
+
+        if total_change > 0:
+            print(f"[SimpleTowerDefenseELM] Output weights updated (total change: {total_change:.6f})")
 
 # Global model instances
 baseline_elm = SimpleTowerDefenseELM(random_state=42)
