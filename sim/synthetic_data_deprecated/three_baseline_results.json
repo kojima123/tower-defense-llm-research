@@ -1,0 +1,2070 @@
+{
+  "experiment_data": {
+    "elm_only": [
+      {
+        "episode": 1,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 33,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 2,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 42,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 3,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 43,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 4,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 65,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 5,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 40,
+        "towers": 3,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 6,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 9,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 7,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 11,
+        "towers": 3,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 8,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 12,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 9,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 36,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 10,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 34,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 11,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 58,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 12,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 0,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 13,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 10,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 14,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 29,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 15,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 36,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 16,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 2,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 17,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 18,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 18,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 17,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 19,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 39,
+        "towers": 4,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 20,
+        "seed": 42,
+        "condition": "elm_only",
+        "score": 34,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 1,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 39,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 2,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 27,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 3,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 45,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 4,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 30,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 5,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 40,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 6,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 17,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 7,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 23,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 8,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 50,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 9,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 46,
+        "towers": 4,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 10,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 19,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 11,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 52,
+        "towers": 4,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 12,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 32,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 13,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 36,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 14,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 73,
+        "towers": 3,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 15,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 68,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 16,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 70,
+        "towers": 4,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 17,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 36,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 18,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 52,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 19,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 54,
+        "towers": 3,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 20,
+        "seed": 123,
+        "condition": "elm_only",
+        "score": 41,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 1,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 18,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 2,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 26,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 3,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 27,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 4,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 52,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 5,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 45,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 6,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 52,
+        "towers": 3,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 7,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 53,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 8,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 39,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 9,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 55,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 10,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 0,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 11,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 47,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 12,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 31,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 13,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 34,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 14,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 39,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 15,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 20,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 16,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 67,
+        "towers": 3,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 17,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 35,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 18,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 52,
+        "towers": 1,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 19,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 3,
+        "towers": 2,
+        "effectiveness": 0.0
+      },
+      {
+        "episode": 20,
+        "seed": 456,
+        "condition": "elm_only",
+        "score": 37,
+        "towers": 1,
+        "effectiveness": 0.0
+      }
+    ],
+    "rule_teacher": [
+      {
+        "episode": 1,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 77,
+        "towers": 4,
+        "effectiveness": 0.5868536513567725
+      },
+      {
+        "episode": 2,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 73,
+        "towers": 4,
+        "effectiveness": 0.38851917173263417
+      },
+      {
+        "episode": 3,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 96,
+        "towers": 4,
+        "effectiveness": 0.41265722306645647
+      },
+      {
+        "episode": 4,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 137,
+        "towers": 4,
+        "effectiveness": 0.39908456789840197
+      },
+      {
+        "episode": 5,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 100,
+        "towers": 4,
+        "effectiveness": 0.19610926262558018
+      },
+      {
+        "episode": 6,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 101,
+        "towers": 3,
+        "effectiveness": 0.4413530914638693
+      },
+      {
+        "episode": 7,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 79,
+        "towers": 3,
+        "effectiveness": 0.42486894186636703
+      },
+      {
+        "episode": 8,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 105,
+        "towers": 4,
+        "effectiveness": 0.46819198424028935
+      },
+      {
+        "episode": 9,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 106,
+        "towers": 6,
+        "effectiveness": 0.4905337801430687
+      },
+      {
+        "episode": 10,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 87,
+        "towers": 2,
+        "effectiveness": 0.38013536447417656
+      },
+      {
+        "episode": 11,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 78,
+        "towers": 4,
+        "effectiveness": 0.2371579900785828
+      },
+      {
+        "episode": 12,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 150,
+        "towers": 7,
+        "effectiveness": 0.43491839788527903
+      },
+      {
+        "episode": 13,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 120,
+        "towers": 4,
+        "effectiveness": 0.4494755125128686
+      },
+      {
+        "episode": 14,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 75,
+        "towers": 4,
+        "effectiveness": 0.13963906563868086
+      },
+      {
+        "episode": 15,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 118,
+        "towers": 5,
+        "effectiveness": 0.6178186237752601
+      },
+      {
+        "episode": 16,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 166,
+        "towers": 7,
+        "effectiveness": 0.7447025389803436
+      },
+      {
+        "episode": 17,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 94,
+        "towers": 3,
+        "effectiveness": 0.5072972668460664
+      },
+      {
+        "episode": 18,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 87,
+        "towers": 4,
+        "effectiveness": 0.5623036701030173
+      },
+      {
+        "episode": 19,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 94,
+        "towers": 3,
+        "effectiveness": 0.49923906220907016
+      },
+      {
+        "episode": 20,
+        "seed": 42,
+        "condition": "rule_teacher",
+        "score": 111,
+        "towers": 6,
+        "effectiveness": 0.30593697935940223
+      },
+      {
+        "episode": 1,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 32,
+        "towers": 2,
+        "effectiveness": 0.28027805105082854
+      },
+      {
+        "episode": 2,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 72,
+        "towers": 4,
+        "effectiveness": 0.12748882028249972
+      },
+      {
+        "episode": 3,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 117,
+        "towers": 3,
+        "effectiveness": 0.5166964795009157
+      },
+      {
+        "episode": 4,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 82,
+        "towers": 2,
+        "effectiveness": 0.25203287177237477
+      },
+      {
+        "episode": 5,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 80,
+        "towers": 3,
+        "effectiveness": 0.0579381320703912
+      },
+      {
+        "episode": 6,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 88,
+        "towers": 3,
+        "effectiveness": 0.341123349203384
+      },
+      {
+        "episode": 7,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 114,
+        "towers": 5,
+        "effectiveness": 0.45326891786799367
+      },
+      {
+        "episode": 8,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 112,
+        "towers": 5,
+        "effectiveness": 0.6191650418178668
+      },
+      {
+        "episode": 9,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 62,
+        "towers": 2,
+        "effectiveness": 0.21410950267996598
+      },
+      {
+        "episode": 10,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 112,
+        "towers": 3,
+        "effectiveness": 0.43950505888643193
+      },
+      {
+        "episode": 11,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 105,
+        "towers": 4,
+        "effectiveness": 0.256667404317552
+      },
+      {
+        "episode": 12,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 127,
+        "towers": 5,
+        "effectiveness": 0.5296784708409744
+      },
+      {
+        "episode": 13,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 122,
+        "towers": 6,
+        "effectiveness": 0.355484639801994
+      },
+      {
+        "episode": 14,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 172,
+        "towers": 5,
+        "effectiveness": 0.7940622595712761
+      },
+      {
+        "episode": 15,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 96,
+        "towers": 5,
+        "effectiveness": 0.388979877843904
+      },
+      {
+        "episode": 16,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 89,
+        "towers": 3,
+        "effectiveness": 0.36048222708545585
+      },
+      {
+        "episode": 17,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 54,
+        "towers": 1,
+        "effectiveness": 0.16133355482830963
+      },
+      {
+        "episode": 18,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 159,
+        "towers": 5,
+        "effectiveness": 0.7020537331331732
+      },
+      {
+        "episode": 19,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 102,
+        "towers": 3,
+        "effectiveness": 0.44506717665284506
+      },
+      {
+        "episode": 20,
+        "seed": 123,
+        "condition": "rule_teacher",
+        "score": 83,
+        "towers": 3,
+        "effectiveness": 0.325576652581797
+      },
+      {
+        "episode": 1,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 131,
+        "towers": 6,
+        "effectiveness": 0.48613632404776225
+      },
+      {
+        "episode": 2,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 74,
+        "towers": 2,
+        "effectiveness": 0.2586591003509419
+      },
+      {
+        "episode": 3,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 67,
+        "towers": 2,
+        "effectiveness": 0.5929986511515442
+      },
+      {
+        "episode": 4,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 95,
+        "towers": 3,
+        "effectiveness": 0.4850694033172316
+      },
+      {
+        "episode": 5,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 78,
+        "towers": 4,
+        "effectiveness": 0.3067281593512562
+      },
+      {
+        "episode": 6,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 70,
+        "towers": 3,
+        "effectiveness": 0.38159716219544754
+      },
+      {
+        "episode": 7,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 87,
+        "towers": 3,
+        "effectiveness": 0.4516133553743645
+      },
+      {
+        "episode": 8,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 63,
+        "towers": 2,
+        "effectiveness": 0.16274053384874468
+      },
+      {
+        "episode": 9,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 92,
+        "towers": 3,
+        "effectiveness": 0.5769684636229755
+      },
+      {
+        "episode": 10,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 103,
+        "towers": 4,
+        "effectiveness": 0.42270507667464946
+      },
+      {
+        "episode": 11,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 102,
+        "towers": 4,
+        "effectiveness": 0.39941508913573975
+      },
+      {
+        "episode": 12,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 130,
+        "towers": 5,
+        "effectiveness": 0.3220480153929084
+      },
+      {
+        "episode": 13,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 83,
+        "towers": 4,
+        "effectiveness": 0.5104591209206915
+      },
+      {
+        "episode": 14,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 123,
+        "towers": 5,
+        "effectiveness": 0.3985340420772258
+      },
+      {
+        "episode": 15,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 79,
+        "towers": 2,
+        "effectiveness": 0.2989439936095801
+      },
+      {
+        "episode": 16,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 53,
+        "towers": 2,
+        "effectiveness": 0.5382430157238058
+      },
+      {
+        "episode": 17,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 118,
+        "towers": 4,
+        "effectiveness": 0.40245833603074266
+      },
+      {
+        "episode": 18,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 122,
+        "towers": 5,
+        "effectiveness": 0.4492691314081162
+      },
+      {
+        "episode": 19,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 100,
+        "towers": 4,
+        "effectiveness": 0.5579530388635469
+      },
+      {
+        "episode": 20,
+        "seed": 456,
+        "condition": "rule_teacher",
+        "score": 116,
+        "towers": 3,
+        "effectiveness": 0.4583878972883682
+      }
+    ],
+    "random_teacher": [
+      {
+        "episode": 1,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 17,
+        "towers": 1,
+        "effectiveness": 0
+      },
+      {
+        "episode": 2,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 19,
+        "towers": 1,
+        "effectiveness": 0
+      },
+      {
+        "episode": 3,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 55,
+        "towers": 1,
+        "effectiveness": 0.4911182444854149
+      },
+      {
+        "episode": 4,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 80,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 5,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 37,
+        "towers": 3,
+        "effectiveness": 0
+      },
+      {
+        "episode": 6,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 106,
+        "towers": 5,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 7,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 87,
+        "towers": 3,
+        "effectiveness": 0.0484508906451014
+      },
+      {
+        "episode": 8,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 25,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 9,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 36,
+        "towers": 1,
+        "effectiveness": 0.1639338419266793
+      },
+      {
+        "episode": 10,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 49,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 11,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 52,
+        "towers": 1,
+        "effectiveness": 0
+      },
+      {
+        "episode": 12,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 105,
+        "towers": 4,
+        "effectiveness": 0.11591214045058869
+      },
+      {
+        "episode": 13,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 0,
+        "towers": 1,
+        "effectiveness": 0
+      },
+      {
+        "episode": 14,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 34,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 15,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 94,
+        "towers": 3,
+        "effectiveness": 0.44154836733854885
+      },
+      {
+        "episode": 16,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 60,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 17,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 55,
+        "towers": 4,
+        "effectiveness": 0.18100242364396635
+      },
+      {
+        "episode": 18,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 54,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 19,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 98,
+        "towers": 3,
+        "effectiveness": 0.8531625426717971
+      },
+      {
+        "episode": 20,
+        "seed": 42,
+        "condition": "random_teacher",
+        "score": 83,
+        "towers": 3,
+        "effectiveness": 0
+      },
+      {
+        "episode": 1,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 24,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 2,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 84,
+        "towers": 5,
+        "effectiveness": 0
+      },
+      {
+        "episode": 3,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 69,
+        "towers": 4,
+        "effectiveness": 0.03895836541693729
+      },
+      {
+        "episode": 4,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 70,
+        "towers": 4,
+        "effectiveness": 0
+      },
+      {
+        "episode": 5,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 15,
+        "towers": 3,
+        "effectiveness": 0
+      },
+      {
+        "episode": 6,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 43,
+        "towers": 2,
+        "effectiveness": 0.7771564603174093
+      },
+      {
+        "episode": 7,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 42,
+        "towers": 1,
+        "effectiveness": 0
+      },
+      {
+        "episode": 8,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 52,
+        "towers": 4,
+        "effectiveness": 0.36444376131501277
+      },
+      {
+        "episode": 9,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 64,
+        "towers": 2,
+        "effectiveness": 0.10951862262386441
+      },
+      {
+        "episode": 10,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 91,
+        "towers": 3,
+        "effectiveness": 0.19481599903943267
+      },
+      {
+        "episode": 11,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 62,
+        "towers": 3,
+        "effectiveness": 0
+      },
+      {
+        "episode": 12,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 118,
+        "towers": 4,
+        "effectiveness": 0.6284965913454988
+      },
+      {
+        "episode": 13,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 43,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 14,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 44,
+        "towers": 2,
+        "effectiveness": 0.23202736579498523
+      },
+      {
+        "episode": 15,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 0,
+        "towers": 1,
+        "effectiveness": 0
+      },
+      {
+        "episode": 16,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 44,
+        "towers": 2,
+        "effectiveness": 0.27040949464148434
+      },
+      {
+        "episode": 17,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 0,
+        "towers": 1,
+        "effectiveness": 0.33901322921448945
+      },
+      {
+        "episode": 18,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 55,
+        "towers": 3,
+        "effectiveness": 0
+      },
+      {
+        "episode": 19,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 33,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 20,
+        "seed": 123,
+        "condition": "random_teacher",
+        "score": 22,
+        "towers": 1,
+        "effectiveness": 0
+      },
+      {
+        "episode": 1,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 0,
+        "towers": 1,
+        "effectiveness": 0
+      },
+      {
+        "episode": 2,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 104,
+        "towers": 3,
+        "effectiveness": 0.37925969967165607
+      },
+      {
+        "episode": 3,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 85,
+        "towers": 3,
+        "effectiveness": 0.25056670502598627
+      },
+      {
+        "episode": 4,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 72,
+        "towers": 3,
+        "effectiveness": 0.8092968651948682
+      },
+      {
+        "episode": 5,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 88,
+        "towers": 3,
+        "effectiveness": 0.5522409961304116
+      },
+      {
+        "episode": 6,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 137,
+        "towers": 5,
+        "effectiveness": 0.35790491099935645
+      },
+      {
+        "episode": 7,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 0,
+        "towers": 1,
+        "effectiveness": 0.05084043414677665
+      },
+      {
+        "episode": 8,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 0,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 9,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 21,
+        "towers": 1,
+        "effectiveness": 0.5104350568855759
+      },
+      {
+        "episode": 10,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 101,
+        "towers": 4,
+        "effectiveness": 0.2879796018606289
+      },
+      {
+        "episode": 11,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 0,
+        "towers": 1,
+        "effectiveness": 0
+      },
+      {
+        "episode": 12,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 93,
+        "towers": 3,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 13,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 103,
+        "towers": 3,
+        "effectiveness": 0.525143863032856
+      },
+      {
+        "episode": 14,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 40,
+        "towers": 2,
+        "effectiveness": 0
+      },
+      {
+        "episode": 15,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 78,
+        "towers": 3,
+        "effectiveness": 0.8582905009636898
+      },
+      {
+        "episode": 16,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 82,
+        "towers": 2,
+        "effectiveness": 0.4672900901882191
+      },
+      {
+        "episode": 17,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 104,
+        "towers": 3,
+        "effectiveness": 0.8899441709337624
+      },
+      {
+        "episode": 18,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 16,
+        "towers": 1,
+        "effectiveness": 0
+      },
+      {
+        "episode": 19,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 101,
+        "towers": 3,
+        "effectiveness": 0.20406962386246894
+      },
+      {
+        "episode": 20,
+        "seed": 456,
+        "condition": "random_teacher",
+        "score": 66,
+        "towers": 2,
+        "effectiveness": 0.22303082882004233
+      }
+    ],
+    "llm_teacher": [
+      {
+        "episode": 1,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 207,
+        "towers": 6,
+        "effectiveness": 0.8182603533090005
+      },
+      {
+        "episode": 2,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 170,
+        "towers": 5,
+        "effectiveness": 0.5985916824981486
+      },
+      {
+        "episode": 3,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 278,
+        "towers": 10,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 4,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 199,
+        "towers": 7,
+        "effectiveness": 0.7575346066778956
+      },
+      {
+        "episode": 5,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 242,
+        "towers": 10,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 6,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 326,
+        "towers": 12,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 7,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 211,
+        "towers": 8,
+        "effectiveness": 0.9327884011271633
+      },
+      {
+        "episode": 8,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 164,
+        "towers": 7,
+        "effectiveness": 0.71488972934689
+      },
+      {
+        "episode": 9,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 180,
+        "towers": 8,
+        "effectiveness": 0.8331424872313813
+      },
+      {
+        "episode": 10,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 215,
+        "towers": 11,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 11,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 179,
+        "towers": 6,
+        "effectiveness": 0.9085788526211216
+      },
+      {
+        "episode": 12,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 207,
+        "towers": 9,
+        "effectiveness": 0.9847593060010926
+      },
+      {
+        "episode": 13,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 167,
+        "towers": 5,
+        "effectiveness": 0.7786609249227717
+      },
+      {
+        "episode": 14,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 156,
+        "towers": 6,
+        "effectiveness": 0.709974628193918
+      },
+      {
+        "episode": 15,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 215,
+        "towers": 8,
+        "effectiveness": 0.684331315650388
+      },
+      {
+        "episode": 16,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 165,
+        "towers": 10,
+        "effectiveness": 0.583816193494663
+      },
+      {
+        "episode": 17,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 205,
+        "towers": 6,
+        "effectiveness": 0.7908336524157414
+      },
+      {
+        "episode": 18,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 219,
+        "towers": 7,
+        "effectiveness": 0.8718044548776959
+      },
+      {
+        "episode": 19,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 160,
+        "towers": 5,
+        "effectiveness": 0.7893477361840275
+      },
+      {
+        "episode": 20,
+        "seed": 42,
+        "condition": "llm_teacher",
+        "score": 218,
+        "towers": 7,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 1,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 193,
+        "towers": 9,
+        "effectiveness": 0.7217589856818112
+      },
+      {
+        "episode": 2,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 195,
+        "towers": 7,
+        "effectiveness": 0.7728870062781663
+      },
+      {
+        "episode": 3,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 221,
+        "towers": 8,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 4,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 197,
+        "towers": 8,
+        "effectiveness": 0.7317137283023774
+      },
+      {
+        "episode": 5,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 207,
+        "towers": 6,
+        "effectiveness": 0.9404988884135906
+      },
+      {
+        "episode": 6,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 96,
+        "towers": 3,
+        "effectiveness": 0.28994842732925313
+      },
+      {
+        "episode": 7,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 138,
+        "towers": 6,
+        "effectiveness": 0.6192348852679427
+      },
+      {
+        "episode": 8,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 192,
+        "towers": 6,
+        "effectiveness": 0.7590730357140467
+      },
+      {
+        "episode": 9,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 172,
+        "towers": 6,
+        "effectiveness": 0.6799640609908141
+      },
+      {
+        "episode": 10,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 169,
+        "towers": 5,
+        "effectiveness": 0.7779359449369768
+      },
+      {
+        "episode": 11,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 170,
+        "towers": 5,
+        "effectiveness": 0.7115269573848046
+      },
+      {
+        "episode": 12,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 221,
+        "towers": 8,
+        "effectiveness": 0.7954137870363326
+      },
+      {
+        "episode": 13,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 183,
+        "towers": 8,
+        "effectiveness": 0.7593080345101015
+      },
+      {
+        "episode": 14,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 180,
+        "towers": 6,
+        "effectiveness": 0.8367781444298693
+      },
+      {
+        "episode": 15,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 227,
+        "towers": 7,
+        "effectiveness": 0.9061587057297033
+      },
+      {
+        "episode": 16,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 170,
+        "towers": 5,
+        "effectiveness": 0.5242099137458829
+      },
+      {
+        "episode": 17,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 186,
+        "towers": 6,
+        "effectiveness": 0.6223873894373133
+      },
+      {
+        "episode": 18,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 199,
+        "towers": 8,
+        "effectiveness": 0.9028407751830639
+      },
+      {
+        "episode": 19,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 239,
+        "towers": 8,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 20,
+        "seed": 123,
+        "condition": "llm_teacher",
+        "score": 179,
+        "towers": 7,
+        "effectiveness": 0.881722552092692
+      },
+      {
+        "episode": 1,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 220,
+        "towers": 7,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 2,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 184,
+        "towers": 6,
+        "effectiveness": 0.9247627014078209
+      },
+      {
+        "episode": 3,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 224,
+        "towers": 7,
+        "effectiveness": 0.9384277982470238
+      },
+      {
+        "episode": 4,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 153,
+        "towers": 7,
+        "effectiveness": 0.887493291395771
+      },
+      {
+        "episode": 5,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 180,
+        "towers": 6,
+        "effectiveness": 0.7177581467969459
+      },
+      {
+        "episode": 6,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 210,
+        "towers": 8,
+        "effectiveness": 0.9645003223649483
+      },
+      {
+        "episode": 7,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 197,
+        "towers": 6,
+        "effectiveness": 0.7395945861210955
+      },
+      {
+        "episode": 8,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 283,
+        "towers": 10,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 9,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 204,
+        "towers": 6,
+        "effectiveness": 0.8261480925938798
+      },
+      {
+        "episode": 10,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 156,
+        "towers": 5,
+        "effectiveness": 0.7739900395270246
+      },
+      {
+        "episode": 11,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 178,
+        "towers": 6,
+        "effectiveness": 0.6626563995455738
+      },
+      {
+        "episode": 12,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 201,
+        "towers": 9,
+        "effectiveness": 0.7356855868334522
+      },
+      {
+        "episode": 13,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 185,
+        "towers": 7,
+        "effectiveness": 0.6153508180552787
+      },
+      {
+        "episode": 14,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 231,
+        "towers": 8,
+        "effectiveness": 0.9329014621412095
+      },
+      {
+        "episode": 15,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 156,
+        "towers": 5,
+        "effectiveness": 0.949502128428903
+      },
+      {
+        "episode": 16,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 197,
+        "towers": 7,
+        "effectiveness": 0.9437081797371407
+      },
+      {
+        "episode": 17,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 195,
+        "towers": 7,
+        "effectiveness": 0.973409799577227
+      },
+      {
+        "episode": 18,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 224,
+        "towers": 7,
+        "effectiveness": 1.0
+      },
+      {
+        "episode": 19,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 172,
+        "towers": 6,
+        "effectiveness": 0.7393888062670575
+      },
+      {
+        "episode": 20,
+        "seed": 456,
+        "condition": "llm_teacher",
+        "score": 162,
+        "towers": 7,
+        "effectiveness": 0.8727519026695135
+      }
+    ]
+  },
+  "condition_names": {
+    "elm_only": "ELM単体",
+    "rule_teacher": "ルール教師",
+    "random_teacher": "ランダム教師",
+    "llm_teacher": "LLM教師"
+  },
+  "descriptive_statistics": {
+    "elm_only": {
+      "name": "ELM単体",
+      "n": 60,
+      "mean": 35.833333333333336,
+      "std": 17.84221490646163,
+      "sem": 2.3034200397393207,
+      "median": 36.0,
+      "ci_95": [
+        31.22420048001906,
+        40.44246618664761
+      ],
+      "min": "0",
+      "max": "73",
+      "towers_mean": 1.7,
+      "effectiveness_mean": 0.0
+    },
+    "rule_teacher": {
+      "name": "ルール教師",
+      "n": 60,
+      "mean": 98.66666666666667,
+      "std": 27.427356544254312,
+      "sem": 3.5408565042129987,
+      "median": 96.0,
+      "ci_95": [
+        91.58142916726268,
+        105.75190416607066
+      ],
+      "min": "32",
+      "max": "172",
+      "towers_mean": 3.783333333333333,
+      "effectiveness_mean": 0.4128119379738628
+    },
+    "random_teacher": {
+      "name": "ランダム教師",
+      "n": 60,
+      "mean": 56.86666666666667,
+      "std": 35.479985605000934,
+      "sem": 4.58044644572825,
+      "median": 55.0,
+      "ci_95": [
+        47.70121449918361,
+        66.03211883414973
+      ],
+      "min": "0",
+      "max": "137",
+      "towers_mean": 2.433333333333333,
+      "effectiveness_mean": 0.2269376948097918
+    },
+    "llm_teacher": {
+      "name": "LLM教師",
+      "n": 60,
+      "mean": 195.48333333333332,
+      "std": 35.62111907694346,
+      "sem": 4.598666698609111,
+      "median": 195.0,
+      "ci_95": [
+        186.28142252404805,
+        204.6852441426186
+      ],
+      "min": "96",
+      "max": "326",
+      "towers_mean": 7.033333333333333,
+      "effectiveness_mean": 0.8198117601454418
+    }
+  },
+  "pairwise_comparisons": {
+    "rule_teacher_vs_elm_only": {
+      "cond1_name": "ELM単体",
+      "cond2_name": "ルール教師",
+      "mean_diff": 62.833333333333336,
+      "cohens_d": 2.7157548349429694,
+      "p_value": 3.1310902547403996e-27,
+      "win_rate": 0.9666666666666667,
+      "significant": "True"
+    },
+    "random_teacher_vs_elm_only": {
+      "cond1_name": "ELM単体",
+      "cond2_name": "ランダム教師",
+      "mean_diff": 21.03333333333333,
+      "cohens_d": 0.7490025500219953,
+      "p_value": 9.173261476073408e-05,
+      "win_rate": 0.6666666666666666,
+      "significant": "True"
+    },
+    "llm_teacher_vs_elm_only": {
+      "cond1_name": "ELM単体",
+      "cond2_name": "LLM教師",
+      "mean_diff": 159.64999999999998,
+      "cohens_d": 5.667178543599564,
+      "p_value": 8.679602241291553e-49,
+      "win_rate": 1.0,
+      "significant": "True"
+    },
+    "random_teacher_vs_rule_teacher": {
+      "cond1_name": "ルール教師",
+      "cond2_name": "ランダム教師",
+      "mean_diff": -41.800000000000004,
+      "cohens_d": -1.3181826940787666,
+      "p_value": 6.900106589284765e-11,
+      "win_rate": 0.2,
+      "significant": "True"
+    },
+    "llm_teacher_vs_rule_teacher": {
+      "cond1_name": "ルール教師",
+      "cond2_name": "LLM教師",
+      "mean_diff": 96.81666666666665,
+      "cohens_d": 3.045570401559309,
+      "p_value": 5.427039755716748e-32,
+      "win_rate": 0.9833333333333333,
+      "significant": "True"
+    },
+    "llm_teacher_vs_random_teacher": {
+      "cond1_name": "ランダム教師",
+      "cond2_name": "LLM教師",
+      "mean_diff": 138.61666666666665,
+      "cohens_d": 3.8991347379400403,
+      "p_value": 2.3730929383379023e-42,
+      "win_rate": 1.0,
+      "significant": "True"
+    }
+  },
+  "experiment_metadata": {
+    "total_trials_per_condition": 60,
+    "seeds_used": [
+      42,
+      123,
+      456
+    ],
+    "conditions_tested": 4,
+    "experiment_date": "2025-09-26T00:44:21.118848"
+  }
+}
