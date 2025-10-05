@@ -106,8 +106,8 @@ class ExperimentCLI:
             if 'all' in args.teachers:
                 args.teachers = self.available_teachers
             
-            # 重複除去
-            args.teachers = list(set(args.teachers))
+            # 重複除去（順序保持）
+            args.teachers = list(dict.fromkeys(args.teachers))
             
             # 無効な教師チェック
             invalid_teachers = set(args.teachers) - set(self.available_teachers)
